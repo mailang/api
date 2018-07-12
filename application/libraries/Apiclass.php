@@ -55,7 +55,7 @@ class Apiclass {
         return $arr;
     }
 
-    public function response($code,$arr = null,$orderno)
+    public function response($code,$arr = null,$orderno = null)
     {
         $jsondata["code"] = "$code";
         //$jsondata["time"] = date("Y-m-d H:i:s");
