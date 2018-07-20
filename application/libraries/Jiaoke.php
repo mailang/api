@@ -163,7 +163,7 @@ class Jiaoke {
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POST,true);
             curl_setopt($ch, CURLOPT_POSTFIELDS,$data_string);
-            curl_setopt($ch, CURLOPT_TIMEOUT,10);
+            curl_setopt($ch, CURLOPT_TIMEOUT,20);
             curl_setopt($ch, CURLOPT_HTTPHEADER,array(
                 'Content-Type: application/json; charset=utf-8',
             ));
@@ -209,7 +209,7 @@ class Jiaoke {
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POST,true);
             curl_setopt($ch, CURLOPT_POSTFIELDS,$data_string);
-            curl_setopt($ch, CURLOPT_TIMEOUT,10);
+            curl_setopt($ch, CURLOPT_TIMEOUT,20);
             curl_setopt($ch, CURLOPT_HTTPHEADER,array(
                 'Content-Type: application/json; charset=utf-8',
             ));

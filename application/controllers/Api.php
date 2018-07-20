@@ -833,18 +833,122 @@ class Api extends CI_Controller {
                                     );
                                     $ischarge = 1;
                                     break;
-                                case  "2005":
+                                case  "1022":
+                                    $state = "1122";
+                                    $result = array(
+                                        "result"=>"银行卡状态错误",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "1002":
                                     $state = "1102";
                                     $result = array(
-                                        "result"=>"参数错误",
+                                        "result"=>"库无",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "1003":
+                                    $state = "1103";
+                                    $result = array(
+                                        "result"=>"验证失败",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "1004":
+                                    $state = "1104";
+                                    $result = array(
+                                        "result"=>"卡验证接口错误",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "1005":
+                                    $state = "1105";
+                                    $result = array(
+                                        "result"=>"无效的身份证号码",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "1006":
+                                    $state = "1106";
+                                    $result = array(
+                                        "result"=>"无效的姓名",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "1007":
+                                    $state = "1107";
+                                    $result = array(
+                                        "result"=>"非法参数",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "1008":
+                                    $state = "1108";
+                                    $result = array(
+                                        "result"=>"无效手机号",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "1009":
+                                    $state = "1109";
+                                    $result = array(
+                                        "result"=>"无效银行卡",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "1010":
+                                    $state = "1110";
+                                    $result = array(
+                                        "result"=>"无法验证，无记录（无对应银行卡记录）",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "1011":
+                                    $state = "1111";
+                                    $result = array(
+                                        "result"=>"发卡行不支持此比交易",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "2005":
+                                    $state = "1201";
+                                    $result = array(
+                                        "result"=>"查询参数错误",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "2006":
+                                    $state = "1202";
+                                    $result = array(
+                                        "result"=>"查询结果失败，由于银行卡号格式错误导致的异常",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "2007":
+                                    $state = "1203";
+                                    $result = array(
+                                        "result"=>"手机号码类型不符",
                                         "state"=>$state
                                     );
                                     $ischarge = 0;
                                     break;
                                 case  "9901":
-                                    $state = "1103";
+                                    $state = "1204";
                                     $result = array(
-                                        "result"=>"查询错误",
+                                        "result"=>"查询失败",
                                         "state"=>$state
                                     );
                                     $ischarge = 0;
@@ -937,18 +1041,122 @@ class Api extends CI_Controller {
                                     );
                                     $ischarge = 1;
                                     break;
-                                case  "2005":
+                                case  "1022":
+                                    $state = "1122";
+                                    $result = array(
+                                        "result"=>"银行卡状态错误",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "1002":
                                     $state = "1102";
                                     $result = array(
-                                        "result"=>"参数错误",
+                                        "result"=>"库无",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "1003":
+                                    $state = "1103";
+                                    $result = array(
+                                        "result"=>"验证失败",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "1004":
+                                    $state = "1104";
+                                    $result = array(
+                                        "result"=>"卡验证接口错误",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "1005":
+                                    $state = "1105";
+                                    $result = array(
+                                        "result"=>"无效的身份证号码",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "1006":
+                                    $state = "1106";
+                                    $result = array(
+                                        "result"=>"无效的姓名",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "1007":
+                                    $state = "1107";
+                                    $result = array(
+                                        "result"=>"非法参数",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "1008":
+                                    $state = "1108";
+                                    $result = array(
+                                        "result"=>"无效手机号",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "1009":
+                                    $state = "1109";
+                                    $result = array(
+                                        "result"=>"无效银行卡",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "1010":
+                                    $state = "1110";
+                                    $result = array(
+                                        "result"=>"无法验证，无记录",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "1011":
+                                    $state = "1111";
+                                    $result = array(
+                                        "result"=>"发卡行不支持此笔交易",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "2005":
+                                    $state = "1201";
+                                    $result = array(
+                                        "result"=>"查询参数错误",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "2006":
+                                    $state = "1202";
+                                    $result = array(
+                                        "result"=>"查询结果失败，由于银行卡号格式错误导致的异常",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "2007":
+                                    $state = "1203";
+                                    $result = array(
+                                        "result"=>"手机号码类型不符",
                                         "state"=>$state
                                     );
                                     $ischarge = 0;
                                     break;
                                 case  "9901":
-                                    $state = "1103";
+                                    $state = "1204";
                                     $result = array(
-                                        "result"=>"查询错误",
+                                        "result"=>"查询失败",
                                         "state"=>$state
                                     );
                                     $ischarge = 0;
