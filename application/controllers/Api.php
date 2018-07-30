@@ -815,7 +815,7 @@ class Api extends CI_Controller {
         }
     }
 
-    public function szmcmcch()
+    public function szmcmcchbak()
     {
         try{
             //判断用户接口权限
@@ -1169,7 +1169,7 @@ class Api extends CI_Controller {
         }
     }
 
-    public function cmccthree()
+    public function szmcmcch()
     {
         try{
             //判断用户接口权限
@@ -1240,6 +1240,32 @@ class Api extends CI_Controller {
                                     $this->apiclass->response(500);
                                     return;
                             }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"zhongchengxingetmobile");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        elseif ($code == "101" || $code == "101001" || $code == "101002" || $code == "101003" || $code == "101005")
+                        {
+                            $state = "1103";
+                            $result = array(
+                                "result"=>"参数错误",
+                                "state"=>$state
+                            );
+                            $ischarge = 0;
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"zhongchengxingetmobile");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        elseif ($code == "102")
+                        {
+                            $state = "1104";
+                            $result = array(
+                                "result"=>"查询错误",
+                                "state"=>$state
+                            );
+                            $ischarge = 0;
                             $code = "100";
                             $orderno = $this->apiclass->createorderno();
                             $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"zhongchengxingetmobile");
