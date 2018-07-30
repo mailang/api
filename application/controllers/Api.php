@@ -93,7 +93,11 @@ class Api extends CI_Controller {
                                     $ischarge = 1;
                                     break;
                                 case  "1104":
+                                    $state = "1102";
+                                    $ischarge = 0;
+                                    break;
                                 case  "1105":
+                                    $state = "1103";
                                     $ischarge = 0;
                                     break;
                                 default:
@@ -186,7 +190,11 @@ class Api extends CI_Controller {
                                     $ischarge = 1;
                                     break;
                                 case  "1104":
+                                    $state = "1102";
+                                    $ischarge = 0;
+                                    break;
                                 case  "1105":
+                                    $state = "1103";
                                     $ischarge = 0;
                                     break;
                                 default:
@@ -280,7 +288,11 @@ class Api extends CI_Controller {
                                     $ischarge = 1;
                                     break;
                                 case  "1104":
+                                    $state = "1102";
+                                    $ischarge = 0;
+                                    break;
                                 case  "1105":
+                                    $state = "1103";
                                     $ischarge = 0;
                                     break;
                                 default:
@@ -355,9 +367,9 @@ class Api extends CI_Controller {
                             {
                                 case  "1100":
                                 case  "1101":
+                                case  "1102":
                                     $ischarge = 1;
                                     break;
-                                case  "1102":
                                 case  "1103":
                                     $ischarge = 0;
                                     break;
@@ -879,15 +891,16 @@ class Api extends CI_Controller {
 //                                    $ischarge = 0;
 //                                    break;
                                 case  "2005":
-                                    $state = "1104";
+                                    $state = "1103";
                                     $result = array(
                                         "result"=>"参数错误",
                                         "state"=>$state
                                     );
                                     $ischarge = 0;
                                     break;
+                                case  "2001":
                                 case  "9901":
-                                    $state = "1105";
+                                    $state = "1104";
                                     $result = array(
                                         "result"=>"查询错误",
                                         "state"=>$state
@@ -975,17 +988,10 @@ class Api extends CI_Controller {
                                     $ischarge = 1;
                                     break;
                                 case  "1001":
+                                case  "1022":
                                     $state = "1101";
                                     $result = array(
                                         "result"=>"不一致",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 1;
-                                    break;
-                                case  "1022":
-                                    $state = "1122";
-                                    $result = array(
-                                        "result"=>"银行卡状态错误",
                                         "state"=>$state
                                     );
                                     $ischarge = 1;
@@ -999,103 +1005,19 @@ class Api extends CI_Controller {
                                     $ischarge = 0;
                                     break;
                                 case  "1003":
-                                    $state = "1103";
-                                    $result = array(
-                                        "result"=>"验证失败",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "1004":
-                                    $state = "1104";
-                                    $result = array(
-                                        "result"=>"卡验证接口错误",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "1005":
-                                    $state = "1105";
-                                    $result = array(
-                                        "result"=>"无效的身份证号码",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "1006":
-                                    $state = "1106";
-                                    $result = array(
-                                        "result"=>"无效的姓名",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "1007":
-                                    $state = "1107";
-                                    $result = array(
-                                        "result"=>"非法参数",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "1008":
-                                    $state = "1108";
-                                    $result = array(
-                                        "result"=>"无效手机号",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "1009":
-                                    $state = "1109";
-                                    $result = array(
-                                        "result"=>"无效银行卡",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "1010":
-                                    $state = "1110";
-                                    $result = array(
-                                        "result"=>"无法验证，无记录（无对应银行卡记录）",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "1011":
-                                    $state = "1111";
-                                    $result = array(
-                                        "result"=>"发卡行不支持此比交易",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "2005":
-                                    $state = "1201";
-                                    $result = array(
-                                        "result"=>"查询参数错误",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "2006":
-                                    $state = "1202";
-                                    $result = array(
-                                        "result"=>"查询结果失败，由于银行卡号格式错误导致的异常",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "2007":
-                                    $state = "1203";
-                                    $result = array(
-                                        "result"=>"手机号码类型不符",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "9901":
-                                    $state = "1204";
+                                    $state = "1103";
                                     $result = array(
                                         "result"=>"查询失败",
                                         "state"=>$state
@@ -1183,17 +1105,10 @@ class Api extends CI_Controller {
                                     $ischarge = 1;
                                     break;
                                 case  "1001":
+                                case  "1022":
                                     $state = "1101";
                                     $result = array(
                                         "result"=>"不一致",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 1;
-                                    break;
-                                case  "1022":
-                                    $state = "1122";
-                                    $result = array(
-                                        "result"=>"银行卡状态错误",
                                         "state"=>$state
                                     );
                                     $ischarge = 1;
@@ -1207,103 +1122,19 @@ class Api extends CI_Controller {
                                     $ischarge = 0;
                                     break;
                                 case  "1003":
-                                    $state = "1103";
-                                    $result = array(
-                                        "result"=>"验证失败",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "1004":
-                                    $state = "1104";
-                                    $result = array(
-                                        "result"=>"卡验证接口错误",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "1005":
-                                    $state = "1105";
-                                    $result = array(
-                                        "result"=>"无效的身份证号码",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "1006":
-                                    $state = "1106";
-                                    $result = array(
-                                        "result"=>"无效的姓名",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "1007":
-                                    $state = "1107";
-                                    $result = array(
-                                        "result"=>"非法参数",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "1008":
-                                    $state = "1108";
-                                    $result = array(
-                                        "result"=>"无效手机号",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "1009":
-                                    $state = "1109";
-                                    $result = array(
-                                        "result"=>"无效银行卡",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "1010":
-                                    $state = "1110";
-                                    $result = array(
-                                        "result"=>"无法验证，无记录",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "1011":
-                                    $state = "1111";
-                                    $result = array(
-                                        "result"=>"发卡行不支持此笔交易",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "2005":
-                                    $state = "1201";
-                                    $result = array(
-                                        "result"=>"查询参数错误",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "2006":
-                                    $state = "1202";
-                                    $result = array(
-                                        "result"=>"查询结果失败，由于银行卡号格式错误导致的异常",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "2007":
-                                    $state = "1203";
-                                    $result = array(
-                                        "result"=>"手机号码类型不符",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
                                 case  "9901":
-                                    $state = "1204";
+                                    $state = "1103";
                                     $result = array(
                                         "result"=>"查询失败",
                                         "state"=>$state
@@ -1338,6 +1169,652 @@ class Api extends CI_Controller {
         }
     }
 
+    public function cmccthree()
+    {
+        try{
+            //判断用户接口权限
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
+            if($code == 1)
+            {
+                $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $data = json_decode($datajson,true);
+                $name = !empty($data["name"])?$data["name"]:null;
+                $idNo = !empty($data["idNo"])?$data["idNo"]:null;
+                $phone = !empty($data["phone"])?$data["phone"]:null;
+                //判断参数
+                if($name == null || $idNo == null || $phone == null)
+                {
+                    $code = 110;
+                    $this->apiclass->response($code);
+                }
+                else
+                {
+                    $this->load->library('zhongchengxin');
+                    $out = $this->zhongchengxin->getmobile($name,$idNo,$phone);
+                    //判断返回值
+                    if($out == "500")
+                    {
+                        $this->apiclass->response($out);
+                    }
+                    else
+                    {
+                        $arr = json_decode($out,true);
+                        $code = !empty($arr["status_code"])?$arr["status_code"]:null;
+                        //判断返回json
+                        if ($code == "200")
+                        {
+                            $result = $arr["data"];
+                            $state = $result["verify_3d_real_name"];
+                            //var_dump($result);
+                            $ischarge = 0;
+                            switch ($state)
+                            {
+                                case  "Y":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>"一致",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "N":
+                                case  "F":
+                                    $state = "1101";
+                                    $result = array(
+                                        "result"=>"不一致",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "X":
+                                    $state = "1102";
+                                    $result = array(
+                                        "result"=>"库中无此号",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                default:
+                                    $this->apiclass->response(500);
+                                    return;
+                            }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"zhongchengxingetmobile");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        else
+                        {
+                            $this->apiclass->response(500);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $this->apiclass->response($code);
+            }
+        }
+        catch (Exception $e)
+        {
+            log_message('error',$e->getMessage());
+            $this->apiclass->response(500);
+        }
+    }
+
+    public function telecomonline()
+    {
+        try{
+            //判断用户接口权限
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
+            if($code == 1)
+            {
+                $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $data = json_decode($datajson,true);
+                $phone = !empty($data["phone"])?$data["phone"]:null;
+                //判断参数
+                if($phone == null)
+                {
+                    $code = 110;
+                    $this->apiclass->response($code);
+                }
+                else
+                {
+                    $this->load->library('jiaoke');
+                    $out = $this->jiaoke->telecomonline($phone);
+                    //判断返回值
+                    if($out == "500")
+                    {
+                        $this->apiclass->response($out);
+                    }
+                    else
+                    {
+                        $arr = json_decode($out,true);
+                        $code = !empty($arr["ResultCode"])?$arr["ResultCode"]:null;
+                        //判断返回json
+                        if ($code)
+                        {
+                            $result = "";
+                            //$state = $result[" verify_3d_real_name"];
+                            //var_dump($result);
+                            $ischarge = 0;
+                            switch ($code)
+                            {
+                                case  "1000":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>$arr["Result"],
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "1001":
+                                    $state = "1101";
+                                    $result = array(
+                                        "result"=>"未查到",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "9901":
+                                    $state = "1102";
+                                    $result = array(
+                                        "result"=>"查询错误",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                default:
+                                    $this->apiclass->response(500);
+                                    return;
+                            }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"jiaoketelecomonline");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        else
+                        {
+                            $this->apiclass->response(500);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $this->apiclass->response($code);
+            }
+        }
+        catch (Exception $e)
+        {
+            log_message('error',$e->getMessage());
+            $this->apiclass->response(500);
+        }
+    }
+
+    public function unicomonline()
+    {
+        try{
+            //判断用户接口权限
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
+            if($code == 1)
+            {
+                $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $data = json_decode($datajson,true);
+                $phone = !empty($data["phone"])?$data["phone"]:null;
+                //判断参数
+                if($phone == null)
+                {
+                    $code = 110;
+                    $this->apiclass->response($code);
+                }
+                else
+                {
+                    $this->load->library('jiaoke');
+                    $out = $this->jiaoke->unicomonline($phone);
+                    //判断返回值
+                    if($out == "500")
+                    {
+                        $this->apiclass->response($out);
+                    }
+                    else
+                    {
+                        $arr = json_decode($out,true);
+                        $code = !empty($arr["ResultCode"])?$arr["ResultCode"]:null;
+                        //判断返回json
+                        if ($code)
+                        {
+                            $result = "";
+                            //$state = $result[" verify_3d_real_name"];
+                            //var_dump($result);
+                            $ischarge = 0;
+                            switch ($code)
+                            {
+                                case  "1000":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>$arr["Result"],
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "1001":
+                                    $state = "1101";
+                                    $result = array(
+                                        "result"=>"未查到",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "9901":
+                                    $state = "1102";
+                                    $result = array(
+                                        "result"=>"查询错误",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                default:
+                                    $this->apiclass->response(500);
+                                    return;
+                            }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"jiaokeunicomonline");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        else
+                        {
+                            $this->apiclass->response(500);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $this->apiclass->response($code);
+            }
+        }
+        catch (Exception $e)
+        {
+            log_message('error',$e->getMessage());
+            $this->apiclass->response(500);
+        }
+    }
+
+    public function mobileonline()
+    {
+        try{
+            //判断用户接口权限
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
+            if($code == 1)
+            {
+                $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $data = json_decode($datajson,true);
+                $phone = !empty($data["phone"])?$data["phone"]:null;
+                //判断参数
+                if($phone == null)
+                {
+                    $code = 110;
+                    $this->apiclass->response($code);
+                }
+                else
+                {
+                    $this->load->library('jiaoke');
+                    $out = $this->jiaoke->mobileonline($phone);
+                    //判断返回值
+                    if($out == "500")
+                    {
+                        $this->apiclass->response($out);
+                    }
+                    else
+                    {
+                        $arr = json_decode($out,true);
+                        $code = !empty($arr["ResultCode"])?$arr["ResultCode"]:null;
+                        //判断返回json
+                        if ($code)
+                        {
+                            $result = "";
+                            //$state = $result[" verify_3d_real_name"];
+                            //var_dump($result);
+                            $ischarge = 0;
+                            switch ($code)
+                            {
+                                case  "1000":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>$arr["Result"],
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "1001":
+                                    $state = "1101";
+                                    $result = array(
+                                        "result"=>"未查到",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "9901":
+                                    $state = "1102";
+                                    $result = array(
+                                        "result"=>"查询错误",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                default:
+                                    $this->apiclass->response(500);
+                                    return;
+                            }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"jiaokemobileonline");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        else
+                        {
+                            $this->apiclass->response(500);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $this->apiclass->response($code);
+            }
+        }
+        catch (Exception $e)
+        {
+            log_message('error',$e->getMessage());
+            $this->apiclass->response(500);
+        }
+    }
+
+    public function mobilestatus()
+    {
+        try{
+            //判断用户接口权限
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
+            if($code == 1)
+            {
+                $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $data = json_decode($datajson,true);
+                $phone = !empty($data["phone"])?$data["phone"]:null;
+                //判断参数
+                if($phone == null)
+                {
+                    $code = 110;
+                    $this->apiclass->response($code);
+                }
+                else
+                {
+                    $this->load->library('jiaoke');
+                    $out = $this->jiaoke->mobilestatus($phone);
+                    //判断返回值
+                    if($out == "500")
+                    {
+                        $this->apiclass->response($out);
+                    }
+                    else
+                    {
+                        $arr = json_decode($out,true);
+                        $code = !empty($arr["ResultCode"])?$arr["ResultCode"]:null;
+                        //判断返回json
+                        if ($code)
+                        {
+                            $result = "";
+                            //$state = $result[" verify_3d_real_name"];
+                            //var_dump($result);
+                            $ischarge = 0;
+                            switch ($code)
+                            {
+                                case  "1000":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>$arr["ResultMsg"],
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "1001":
+                                    $state = "1101";
+                                    $result = array(
+                                        "result"=>"未查到",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "9901":
+                                    $state = "1102";
+                                    $result = array(
+                                        "result"=>"查询错误",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                default:
+                                    $this->apiclass->response(500);
+                                    return;
+                            }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"jiaokemobilestatus");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        else
+                        {
+                            $this->apiclass->response(500);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $this->apiclass->response($code);
+            }
+        }
+        catch (Exception $e)
+        {
+            log_message('error',$e->getMessage());
+            $this->apiclass->response(500);
+        }
+    }
+
+    public function telecomstatus()
+    {
+        try{
+            //判断用户接口权限
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
+            if($code == 1)
+            {
+                $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $data = json_decode($datajson,true);
+                $phone = !empty($data["phone"])?$data["phone"]:null;
+                //判断参数
+                if($phone == null)
+                {
+                    $code = 110;
+                    $this->apiclass->response($code);
+                }
+                else
+                {
+                    $this->load->library('jiaoke');
+                    $out = $this->jiaoke->telecomstatus($phone);
+                    //判断返回值
+                    if($out == "500")
+                    {
+                        $this->apiclass->response($out);
+                    }
+                    else
+                    {
+                        $arr = json_decode($out,true);
+                        $code = !empty($arr["ResultCode"])?$arr["ResultCode"]:null;
+                        //判断返回json
+                        if ($code)
+                        {
+                            $result = "";
+                            //$state = $result[" verify_3d_real_name"];
+                            //var_dump($result);
+                            $ischarge = 0;
+                            switch ($code)
+                            {
+                                case  "1000":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>$arr["ResultMsg"],
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "1001":
+                                    $state = "1101";
+                                    $result = array(
+                                        "result"=>"未查到",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "9901":
+                                    $state = "1102";
+                                    $result = array(
+                                        "result"=>"查询错误",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                default:
+                                    $this->apiclass->response(500);
+                                    return;
+                            }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"jiaoketelecomstatus");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        else
+                        {
+                            $this->apiclass->response(500);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $this->apiclass->response($code);
+            }
+        }
+        catch (Exception $e)
+        {
+            log_message('error',$e->getMessage());
+            $this->apiclass->response(500);
+        }
+    }
+
+    public function unicomstatus()
+    {
+        try{
+            //判断用户接口权限
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
+            if($code == 1)
+            {
+                $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $data = json_decode($datajson,true);
+                $phone = !empty($data["phone"])?$data["phone"]:null;
+                //判断参数
+                if($phone == null)
+                {
+                    $code = 110;
+                    $this->apiclass->response($code);
+                }
+                else
+                {
+                    $this->load->library('jiaoke');
+                    $out = $this->jiaoke->unicomstatus($phone);
+                    //判断返回值
+                    if($out == "500")
+                    {
+                        $this->apiclass->response($out);
+                    }
+                    else
+                    {
+                        $arr = json_decode($out,true);
+                        $code = !empty($arr["ResultCode"])?$arr["ResultCode"]:null;
+                        //判断返回json
+                        if ($code)
+                        {
+                            $result = "";
+                            //$state = $result[" verify_3d_real_name"];
+                            //var_dump($result);
+                            $ischarge = 0;
+                            switch ($code)
+                            {
+                                case  "1000":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>$arr["ResultMsg"],
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "1001":
+                                    $state = "1101";
+                                    $result = array(
+                                        "result"=>"未查到",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "9901":
+                                    $state = "1102";
+                                    $result = array(
+                                        "result"=>"查询错误",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                default:
+                                    $this->apiclass->response(500);
+                                    return;
+                            }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"jiaokeunicomstatus");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        else
+                        {
+                            $this->apiclass->response(500);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $this->apiclass->response($code);
+            }
+        }
+        catch (Exception $e)
+        {
+            log_message('error',$e->getMessage());
+            $this->apiclass->response(500);
+        }
+    }
 
 
 }
