@@ -103,4 +103,22 @@ class Apiclass {
         return $orderno;
     }
 
+    public function decrypt($jsondata)
+    {
+        $isencrypt = empty($this->CI->input->server("HTTP_ENCRYPT"))?0:$this->CI->input->server("HTTP_ENCRYPT");
+        if ($isencrypt == 1)
+        {
+            $appkey = $this->CI->input->server("HTTP_APPKEY");
+            $user = $this->CI->api_model->getuser($appkey);
+            $publickey = $user->public_key;
+            $data_json_de = base64_decode($jsondata);
+            $data_json_de = openssl_decrypt($data_json_de, 'AES-128-ECB', $publickey, OPENSSL_RAW_DATA);
+            return $data_json_de;
+        }
+        else
+        {
+            return $jsondata;
+        }
+    }
+
 }

@@ -40,6 +40,8 @@ class Api extends CI_Controller {
             {
                 $datajson = file_get_contents('php://input');
                 log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
                 $data = json_decode($datajson,true);
                 $name = !empty($data["name"])?$data["name"]:null;
                 $cardNo = !empty($data["cardNo"])?$data["cardNo"]:null;
@@ -136,6 +138,8 @@ class Api extends CI_Controller {
             if($code == 1)
             {
                 $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
                 log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
                 $data = json_decode($datajson,true);
                 $name = !empty($data["name"])?$data["name"]:null;
@@ -235,6 +239,8 @@ class Api extends CI_Controller {
             {
                 $datajson = file_get_contents('php://input');
                 log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
                 $data = json_decode($datajson,true);
                 $enName = !empty($data["enName"])?$data["enName"]:null;
                 $cardNo = !empty($data["cardNo"])?$data["cardNo"]:null;
@@ -333,6 +339,8 @@ class Api extends CI_Controller {
             {
                 $datajson = file_get_contents('php://input');
                 log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
                 $data = json_decode($datajson,true);
                 $beginDate = !empty($data["beginDate"])?$data["beginDate"]:null;
                 $name = !empty($data["name"])?$data["name"]:null;
@@ -410,6 +418,8 @@ class Api extends CI_Controller {
             {
                 $datajson = file_get_contents('php://input');
                 log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
                 $data = json_decode($datajson,true);
                 $name = !empty($data["name"])?$data["name"]:null;
                 $idNo = !empty($data["idNo"])?$data["idNo"]:null;
@@ -485,6 +495,8 @@ class Api extends CI_Controller {
             if($code == 1)
             {
                 $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
                 log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
                 $data = json_decode($datajson,true);
                 $name = !empty($data["name"])?$data["name"]:null;
@@ -596,6 +608,8 @@ class Api extends CI_Controller {
             {
                 $datajson = file_get_contents('php://input');
                 log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
                 $data = json_decode($datajson,true);
                 $name = !empty($data["name"])?$data["name"]:null;
                 $idNo = !empty($data["idNo"])?$data["idNo"]:null;
@@ -705,6 +719,8 @@ class Api extends CI_Controller {
             if($code == 1)
             {
                 $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
                 log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
                 $data = json_decode($datajson,true);
                 $name = !empty($data["name"])?$data["name"]:null;
@@ -824,6 +840,8 @@ class Api extends CI_Controller {
             if($code == 1)
             {
                 $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
                 log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
                 $data = json_decode($datajson,true);
                 $name = !empty($data["name"])?$data["name"]:null;
@@ -945,6 +963,8 @@ class Api extends CI_Controller {
             {
                 $datajson = file_get_contents('php://input');
                 log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
                 $data = json_decode($datajson,true);
                 $name = !empty($data["name"])?$data["name"]:null;
                 $idNo = !empty($data["idNo"])?$data["idNo"]:null;
@@ -1062,6 +1082,8 @@ class Api extends CI_Controller {
             {
                 $datajson = file_get_contents('php://input');
                 log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
                 $data = json_decode($datajson,true);
                 $name = !empty($data["name"])?$data["name"]:null;
                 $idNo = !empty($data["idNo"])?$data["idNo"]:null;
@@ -1178,6 +1200,8 @@ class Api extends CI_Controller {
             if($code == 1)
             {
                 $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
                 log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
                 $data = json_decode($datajson,true);
                 $name = !empty($data["name"])?$data["name"]:null;
@@ -1300,6 +1324,8 @@ class Api extends CI_Controller {
             {
                 $datajson = file_get_contents('php://input');
                 log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
                 $data = json_decode($datajson,true);
                 $phone = !empty($data["phone"])?$data["phone"]:null;
                 //判断参数
@@ -1391,6 +1417,8 @@ class Api extends CI_Controller {
             if($code == 1)
             {
                 $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
                 log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
                 $data = json_decode($datajson,true);
                 $phone = !empty($data["phone"])?$data["phone"]:null;
@@ -1484,6 +1512,8 @@ class Api extends CI_Controller {
             {
                 $datajson = file_get_contents('php://input');
                 log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
                 $data = json_decode($datajson,true);
                 $phone = !empty($data["phone"])?$data["phone"]:null;
                 //判断参数
@@ -1575,6 +1605,8 @@ class Api extends CI_Controller {
             if($code == 1)
             {
                 $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
                 log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
                 $data = json_decode($datajson,true);
                 $phone = !empty($data["phone"])?$data["phone"]:null;
@@ -1668,6 +1700,8 @@ class Api extends CI_Controller {
             {
                 $datajson = file_get_contents('php://input');
                 log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
                 $data = json_decode($datajson,true);
                 $phone = !empty($data["phone"])?$data["phone"]:null;
                 //判断参数
@@ -1760,6 +1794,8 @@ class Api extends CI_Controller {
             {
                 $datajson = file_get_contents('php://input');
                 log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
                 $data = json_decode($datajson,true);
                 $phone = !empty($data["phone"])?$data["phone"]:null;
                 //判断参数
@@ -1841,6 +1877,5 @@ class Api extends CI_Controller {
             $this->apiclass->response(500);
         }
     }
-
 
 }
