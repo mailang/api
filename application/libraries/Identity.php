@@ -2,8 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Identity {
-    private $url = "http://122.14.204.130:9090/api/data.do";
-    private $appcode = "423867556273586176";
+    private $url = "http://122.14.204.130:7968/api/data.do";
+    private $appcode = "473801580198494208";
 
     function gettwncard($name,$cardNo,$birthDay,$validity)
     {
