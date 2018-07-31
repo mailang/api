@@ -37,7 +37,7 @@ class Zhongchengxin {
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POST,true);
             curl_setopt($ch, CURLOPT_POSTFIELDS,$poststr);
-            curl_setopt($ch, CURLOPT_TIMEOUT,5);
+            curl_setopt($ch, CURLOPT_TIMEOUT,10);
             curl_setopt($ch, CURLOPT_HTTPHEADER,array(
                 'Content-Type: application/x-www-form-urlencoded'
             ));
