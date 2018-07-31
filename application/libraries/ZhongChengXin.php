@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class ZhongChengXin {
+class Zhongchengxin {
     private $url = "http://apidata.credittone.com:51666/api/test/query";
     //private $url = "http://www.163.com";
     private $username = "test";
