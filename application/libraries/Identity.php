@@ -12,7 +12,7 @@ class Identity {
             $arr = array(
                 'cardType'=>'16',
                 'name'=>$name,
-                'cardNo'=>$cardNo,
+                'cardNum'=>$cardNo,
                 'birthDay'=>$birthDay,
                 'validity'=>$validity
             );
@@ -29,7 +29,7 @@ class Identity {
             curl_setopt($ch, CURLOPT_HTTPHEADER,array(
                 'Content-Type: application/json; charset=utf-8',
                 'AppCode: ' . $this->appcode,
-                'pcode: P_001_0004'
+                'pcode: E_001_0501'
             ));
             $out = curl_exec($ch);
             if(curl_errno($ch))
@@ -56,7 +56,7 @@ class Identity {
             $arr = array(
                 'cardType'=>'24',
                 'name'=>$name,
-                'cardNo'=>$cardNo,
+                'cardNum'=>$cardNo,
                 'birthDay'=>$birthDay,
                 'validity'=>$validity
             );
@@ -73,7 +73,7 @@ class Identity {
             curl_setopt($ch, CURLOPT_HTTPHEADER,array(
                 'Content-Type: application/json; charset=utf-8',
                 'AppCode: ' . $this->appcode,
-                'pcode: P_001_0005'
+                'pcode: E_001_0601'
             ));
             $out = curl_exec($ch);
             if(curl_errno($ch))
@@ -100,7 +100,7 @@ class Identity {
             $arr = array(
                 'cardType'=>'34',
                 'enName'=>$enName,
-                'cardNo'=>$cardNo,
+                'cardNum'=>$cardNo,
                 'birthDay'=>$birthDay,
                 'validity'=>$validity
             );
@@ -117,7 +117,7 @@ class Identity {
             curl_setopt($ch, CURLOPT_HTTPHEADER,array(
                 'Content-Type: application/json; charset=utf-8',
                 'AppCode: ' . $this->appcode,
-                'pcode: P_001_0003'
+                'pcode: E_001_0401'
             ));
             $out = curl_exec($ch);
             if(curl_errno($ch))
@@ -159,7 +159,7 @@ class Identity {
             curl_setopt($ch, CURLOPT_HTTPHEADER,array(
                 'Content-Type: application/json; charset=utf-8',
                 'AppCode: ' . $this->appcode,
-                'pcode: P_001_0002'
+                'pcode: E_001_0301'
             ));
             $out = curl_exec($ch);
             if(curl_errno($ch))
