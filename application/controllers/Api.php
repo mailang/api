@@ -378,6 +378,14 @@ class Api extends CI_Controller {
                                 case  "1102":
                                     $ischarge = 1;
                                     break;
+                                case  "1104":
+                                    $state = "1102";
+                                    $result = array(
+                                        "result"=>"不存在失效证件",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
                                 case  "1103":
                                     $ischarge = 0;
                                     break;
