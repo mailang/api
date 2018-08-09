@@ -1556,7 +1556,10 @@ class Api extends CI_Controller {
                                 case  "A":
                                     $state = "1100";
                                     $result = array(
-                                        "result"=>'{"min":"0","max":"3"}',
+                                        "result" => array(
+                                            "max"=>"0",
+                                            "min"=>"3"
+                                        ),
                                         "state"=>$state
                                     );
                                     $ischarge = 1;
@@ -1564,8 +1567,10 @@ class Api extends CI_Controller {
                                 case  "B":
                                     $state = "1100";
                                     $result = array(
-                                        "result"=>'{"min":"3","max":"6"}',
-
+                                        "result" => array(
+                                            "max"=>"3",
+                                            "min"=>"6"
+                                        ),
                                         "state"=>$state
                                     );
                                     $ischarge = 1;
@@ -1573,7 +1578,21 @@ class Api extends CI_Controller {
                                 case  "C":
                                     $state = "1100";
                                     $result = array(
-                                        "result"=>'{"min":"6","max":"12"}',
+                                        "result" => array(
+                                            "max"=>"6",
+                                            "min"=>"12"
+                                        ),
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "D":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result" => array(
+                                            "max"=>"12",
+                                            "min"=>"24"
+                                        ),
                                         "state"=>$state
                                     );
                                     $ischarge = 1;
@@ -1581,15 +1600,10 @@ class Api extends CI_Controller {
                                 case  "E":
                                     $state = "1100";
                                     $result = array(
-                                        "result"=>'{"min":"12","max":"24"}',
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 1;
-                                    break;
-                                case  "E":
-                                    $state = "1100";
-                                    $result = array(
-                                        "result"=>'{"min":"24","max":"-1"}',
+                                        "result" => array(
+                                            "max"=>"24",
+                                            "min"=>"-1"
+                                        ),
                                         "state"=>$state
                                     );
                                     $ischarge = 1;
