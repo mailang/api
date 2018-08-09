@@ -1510,7 +1510,7 @@ class Api extends CI_Controller {
         }
     }
 
-    public function mobileonlinebak()
+    public function mobileonlinehj()
     {
         try{
             //判断用户接口权限
