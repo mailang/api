@@ -68,7 +68,7 @@ class Apiclass {
             $jsondata["orderNo"] = $orderno;
         }
         $jsondata["message"] = $this->CI->config->item('msg','api')[$code];
-        $data = json_encode($jsondata,JSON_UNESCAPED_UNICODE |JSON_PRETTY_PRINT);
+        $data = json_encode($jsondata,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES |JSON_PRETTY_PRINT);
         $this->CI->output->set_output($data);
     }
 
