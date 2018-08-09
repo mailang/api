@@ -61,7 +61,7 @@ class Zhongchengxin {
         }
     }
 
-    public function mobileonlie($phone)
+    public function mobileonline($phone)
     {
         try {
             $protocol_data_type_name = "phoneNetworkPeriods";
