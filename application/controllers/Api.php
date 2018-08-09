@@ -1510,6 +1510,139 @@ class Api extends CI_Controller {
         }
     }
 
+    public function mobileonlinebak()
+    {
+        try{
+            //判断用户接口权限
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
+            if($code == 1)
+            {
+                $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $data = json_decode($datajson,true);
+                $phone = !empty($data["phone"])?$data["phone"]:null;
+                //判断参数
+                if($phone == null)
+                {
+                    $code = 110;
+                    $this->apiclass->response($code);
+                }
+                else
+                {
+                    $this->load->library('zhongchengxin');
+                    $out = $this->zhongchengxin->mobileonline($phone);
+                    //判断返回值
+                    if($out == "500")
+                    {
+                        $this->apiclass->response($out);
+                    }
+                    else
+                    {
+                        $arr = json_decode($out,true);
+                        $code = !empty($arr["status_code"])?$arr["status_code"]:null;
+
+                        //判断返回json
+                        if ($code == "200")
+                        {
+                            $result = $arr["data"];
+                            $state = $result["phone_network_periods"];
+                            //var_dump($result);
+                            $ischarge = 0;
+                            switch ($state)
+                            {
+                                case  "A":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>'{"min":"0","max":"3"}',
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "B":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>'{"min":"3","max":"6"}',
+
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "C":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>'{"min":"6","max":"12"}',
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "E":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>'{"min":"12","max":"24"}',
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "E":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>'{"min":"24","max":"-1"}',
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "X":
+                                    $state = "1101";
+                                    $result = array(
+                                        "result"=>"未查到",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                default:
+                                    $this->apiclass->response(500);
+                                    return;
+                            }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"zhongchengxinmobileonline");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        elseif ($code == "101" || $code == "102" || $code == "101001" || $code == "101002" || $code == "101003" || $code == "101005")
+                        {
+                            $state = "1102";
+                            $result = array(
+                                "result"=>"查询错误",
+                                "state"=>$state
+                            );
+                            $ischarge = 0;
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"zhongchengxinmobileonline");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        else
+                        {
+                            $this->apiclass->response(500);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $this->apiclass->response($code);
+            }
+        }
+        catch (Exception $e)
+        {
+            log_message('error',$e->getMessage());
+            $this->apiclass->response(500);
+        }
+    }
+
     public function mobileonline()
     {
         try{
