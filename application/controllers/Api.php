@@ -1888,44 +1888,39 @@ class Api extends CI_Controller {
                             switch ($code)
                             {
                                 case  "1000":
-//                                    $state = "1100";
-//                                    $result = array(
-//                                        "result"=>$arr["ResultMsg"],
-//                                        "state"=>$state
-//                                    );
                                     $resultmsg = $arr["ResultMsg"];
                                     switch ($resultmsg)
                                     {
                                         case "正常":
-                                            $state = "1101";
+                                            $state = "1100";
                                             $result = array(
                                                 "result"=>$resultmsg,
                                                 "state"=>$state
                                             );
                                             break;
                                         case "停机":
-                                            $state = "1102";
+                                            $state = "1101";
                                             $result = array(
                                                 "result"=>$resultmsg,
                                                 "state"=>$state
                                             );
                                             break;
                                         case "在网但不可用":
-                                            $state = "1103";
+                                            $state = "1102";
                                             $result = array(
                                                 "result"=>$resultmsg,
                                                 "state"=>$state
                                             );
                                             break;
                                         case "销号/未启用":
-                                            $state = "1104";
+                                            $state = "1103";
                                             $result = array(
                                                 "result"=>$resultmsg,
                                                 "state"=>$state
                                             );
                                             break;
                                         case "预销号":
-                                            $state = "1105";
+                                            $state = "1104";
                                             $result = array(
                                                 "result"=>$resultmsg,
                                                 "state"=>$state
@@ -1933,19 +1928,19 @@ class Api extends CI_Controller {
                                             break;
                                         case "异常":
                                         case "异常(号码状态异常)":
+                                        case "异常（号码状态异常）":
                                         default:
-                                            $state = "1106";
+                                            $state = "1105";
                                             $result = array(
                                                 "result"=>"异常(号码状态异常)",
                                                 "state"=>$state
                                             );
                                             break;
-
                                     }
                                     $ischarge = 1;
                                     break;
                                 case  "1001":
-                                    $state = "1107";
+                                    $state = "1106";
                                     $result = array(
                                         "result"=>"未查到",
                                         "state"=>$state
@@ -1953,7 +1948,7 @@ class Api extends CI_Controller {
                                     $ischarge = 0;
                                     break;
                                 case  "9901":
-                                    $state = "1108";
+                                    $state = "1107";
                                     $result = array(
                                         "result"=>"查询错误",
                                         "state"=>$state
