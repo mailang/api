@@ -768,7 +768,7 @@ class Api extends CI_Controller {
                                     $result = array(
                                         "result"=>"对比成功",
                                         "state"=>$state,
-                                        "grade"=>$arr["VerificationScore"]
+                                        "grade"=>number_format($arr["VerificationScore"],2)
                                     );
                                     $ischarge = 1;
                                     break;
@@ -807,7 +807,7 @@ class Api extends CI_Controller {
                                 case  "2002":
                                     $state = "1105";
                                     $result = array(
-                                        "result"=>"图片大小不符合要求",
+                                        "result"=>"图片不存在或已损坏",
                                         "state"=>$state
                                     );
                                     $ischarge = 0;
@@ -815,7 +815,7 @@ class Api extends CI_Controller {
                                 case  "2003":
                                     $state = "1106";
                                     $result = array(
-                                        "result"=>"图片不存在或已损坏",
+                                        "result"=>"图片大小不符合要求",
                                         "state"=>$state
                                     );
                                     $ischarge = 0;
