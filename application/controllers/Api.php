@@ -1698,8 +1698,13 @@ class Api extends CI_Controller {
                 }
                 else
                 {
+                    $this->benchmark->mark('curl_start');
                     $this->load->library('zhongchengxin');
                     $out = $this->zhongchengxin->mobileonline($phone);
+                    $this->benchmark->mark('curl_end');
+                    $time1 = $this->benchmark->elapsed_time('curl_start', 'curl_end');
+                    log_message('info',$time1);
+
                     //判断返回值
                     if($out == "500")
                     {
@@ -2033,8 +2038,12 @@ class Api extends CI_Controller {
                 }
                 else
                 {
+                    $this->benchmark->mark('curl_start');
                     $this->load->library('jiaoke');
                     $out = $this->jiaoke->mobilestatus($phone);
+                    $this->benchmark->mark('curl_end');
+                    $time1 = $this->benchmark->elapsed_time('curl_start', 'curl_end');
+                    log_message('info',$time1);
                     //判断返回值
                     if($out == "500")
                     {
