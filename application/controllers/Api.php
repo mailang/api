@@ -1357,6 +1357,9 @@ class Api extends CI_Controller {
     {
         try{
             //判断用户接口权限
+            $this->benchmark->mark('function_start');
+            $time1 = $this->benchmark->elapsed_time('total_execution_time_start', 'function_start');
+            log_message('info',$time1);
             $validitycode = $this->apiclass->validate();
             $code = is_numeric($validitycode)?$validitycode:1;
             if($code == 1)
@@ -1377,8 +1380,14 @@ class Api extends CI_Controller {
                 }
                 else
                 {
+                    $this->benchmark->mark('curl_start');
+                    $time2 = $this->benchmark->elapsed_time('function_start', 'curl_start');
+                    log_message('info',$time2);
                     $this->load->library('zhongchengxin');
                     $out = $this->zhongchengxin->getmobile($name,$idNo,$phone);
+                    $this->benchmark->mark('curl_end');
+                    $time3 = $this->benchmark->elapsed_time('curl_start', 'curl_end');
+                    log_message('info',$time3);
                     //判断返回值
                     if($out == "500")
                     {
@@ -1461,6 +1470,9 @@ class Api extends CI_Controller {
                         {
                             $this->apiclass->response(500);
                         }
+                        $this->benchmark->mark('function_end');
+                        $time4 = $this->benchmark->elapsed_time('curl_end', 'function_end');
+                        log_message('info',$time4);
                     }
                 }
             }
