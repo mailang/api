@@ -96,10 +96,18 @@ class Api extends CI_Controller {
                                     break;
                                 case  "1104":
                                     $state = "1102";
+                                    $result = array(
+                                        "result"=>"无匹配记录",
+                                        "state"=>$state
+                                    );
                                     $ischarge = 0;
                                     break;
                                 case  "1105":
                                     $state = "1103";
+                                    $result = array(
+                                        "result"=>"参数错误",
+                                        "state"=>$state
+                                    );
                                     $ischarge = 0;
                                     break;
                                 default:
@@ -195,10 +203,18 @@ class Api extends CI_Controller {
                                     break;
                                 case  "1104":
                                     $state = "1102";
+                                    $result = array(
+                                        "result"=>"无匹配记录",
+                                        "state"=>$state
+                                    );
                                     $ischarge = 0;
                                     break;
                                 case  "1105":
                                     $state = "1103";
+                                    $result = array(
+                                        "result"=>"参数错误",
+                                        "state"=>$state
+                                    );
                                     $ischarge = 0;
                                     break;
                                 default:
@@ -295,10 +311,18 @@ class Api extends CI_Controller {
                                     break;
                                 case  "1104":
                                     $state = "1102";
+                                    $result = array(
+                                        "result"=>"无匹配记录",
+                                        "state"=>$state
+                                    );
                                     $ischarge = 0;
                                     break;
                                 case  "1105":
                                     $state = "1103";
+                                    $result = array(
+                                        "result"=>"参数错误",
+                                        "state"=>$state
+                                    );
                                     $ischarge = 0;
                                     break;
                                 default:
