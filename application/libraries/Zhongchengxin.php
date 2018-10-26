@@ -4,9 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Zhongchengxin {
     private $url = "http://apidata.credittone.com:51666/api/query";
     //private $url = "http://www.163.com";
-    private $username = "test";
-    private $password = "IefoKVVoLk1QEKIQ";
-    private $key = "kFiB9QgFRKYNRjQB";
+    private $username = "Xinhuashe";
+    private $password = "TdfdY6dhdLhBiRHg";
+    private $key = "0bnAaVkCKNoV6ToU";
 
     public function getmobile($name,$idNo,$phone)
     {
