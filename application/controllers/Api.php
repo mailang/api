@@ -742,7 +742,7 @@ class Api extends CI_Controller {
         }
     }
 
-    public function photoverification()
+    public function photoverificationold()
     {
         try{
             //判断用户接口权限
@@ -896,7 +896,7 @@ class Api extends CI_Controller {
         }
     }
 
-    public function mobile()
+    public function mobileold()
     {
         try{
             //判断用户接口权限
@@ -1377,7 +1377,7 @@ class Api extends CI_Controller {
         }
     }
 
-    public function szmcmcch()
+    public function szmcmcc()
     {
         try{
             //判断用户接口权限
@@ -2445,14 +2445,6 @@ class Api extends CI_Controller {
                                     );
                                     $ischarge = 0;
                                     break;
-//                                case  "2005":
-//                                    $state = "1103";
-//                                    $result = array(
-//                                        "result"=>"姓名或身份证错误",
-//                                        "state"=>$state
-//                                    );
-//                                    $ischarge = 0;
-//                                    break;
                                 case  "3":
                                     $state = "1104";
                                     $result = array(
@@ -2488,5 +2480,255 @@ class Api extends CI_Controller {
             $this->apiclass->response(500);
         }
     }
+
+    public function photoverification()
+    {
+        try{
+            //判断用户接口权限
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
+            if($code == 1)
+            {
+                $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $data = json_decode($datajson,true);
+                $name = !empty($data["name"])?$data["name"]:null;
+                $idNo = !empty($data["idNo"])?$data["idNo"]:null;
+                $photo = !empty($data["photo"])?$data["photo"]:null;
+                //判断参数
+                if($name == null || $idNo == null || $photo == null)
+                {
+                    $code = 110;
+                    $this->apiclass->response($code);
+                }
+                else
+                {
+                    $data = array(
+                        "name"=>$name,
+                        "id_number"=>$idNo,
+                        "imgstr"=>$photo
+                    );
+
+                    $this->load->library('jiaokenew');
+                    $out = $this->jiaoke->photoverification("idphoto",$data);
+                    //判断返回值
+                    if($out == "500")
+                    {
+                        $this->apiclass->response($out);
+                    }
+                    else
+                    {
+                        $arr = json_decode($out,true);
+                        $code = !empty($arr["code"])?$arr["code"]:null;
+                        //var_dump($arr);
+                        //判断返回json
+                        if ($code == 200)
+                        {
+                            $result = "";
+                            //$state = $result["state"];
+                            //var_dump($result);
+                            $ischarge = 0;
+                            switch ($arr["data"])
+                            {
+                                case  "0":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>"对比成功",
+                                        "state"=>$state,
+                                        "grade"=>number_format($arr["msg"],2)
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "1":
+                                    $state = "1101";
+                                    $result = array(
+                                        "result"=>"姓名和身份证号不一致",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "4":
+                                    $state = "1102";
+                                    $result = array(
+                                        "result"=>"姓名和身份证号匹配,库无照片",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "2":
+                                    $state = "1103";
+                                    $result = array(
+                                        "result"=>"身份证无效",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case "3":
+                                    switch ($arr["msg"]){
+                                        case "图片大小不符合要求" :
+                                            $state = "1106";
+                                            $result = array(
+                                                "result"=>"图片大小不符合要求",
+                                                "state"=>$state
+                                            );
+                                            $ischarge = 0;
+                                            break;
+                                        case "图片类型不符合要求":
+                                            $state = "1107";
+                                            $result = array(
+                                                "result"=>"图片类型不符合要求",
+                                                "state"=>$state
+                                            );
+                                            $ischarge = 0;
+                                            break;
+                                        case "图片损坏":
+                                            $state = "1105";
+                                            $result = array(
+                                                "result"=>"图片不存在或已损坏",
+                                                "state"=>$state
+                                            );
+                                            $ischarge = 0;
+                                            break;
+                                        default:
+                                            $this->apiclass->response(500);
+                                            return;
+                                    }
+                                default:
+                                    $this->apiclass->response(500);
+                                    return;
+                            }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"jiaokephotoverification");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        else
+                        {
+                            $this->apiclass->response(500);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $this->apiclass->response($code);
+            }
+        }
+        catch (Exception $e)
+        {
+            log_message('error',$e->getMessage());
+            $this->apiclass->response(500);
+        }
+    }
+
+
+    public function mobile(){
+        try{
+            //判断用户接口权限
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
+            $code = 1;
+            if($code == 1)
+            {
+                $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $data = json_decode($datajson,true);
+                $name = !empty($data["name"])?$data["name"]:null;
+                $idNo = !empty($data["idNo"])?$data["idNo"]:null;
+                $phone = !empty($data["phone"])?$data["phone"]:null;
+                //判断参数
+                if($name == null || $idNo == null || $phone == null)
+                {
+                    $code = 110;
+                    $this->apiclass->response($code);
+                }
+                else
+                {
+                    $data = array(
+                        "name"=>$name,
+                        "id_number"=>$idNo,
+                        "mobile"=>$phone
+
+                    );
+
+                    $this->load->library('jiaokenew');
+                    $out = $this->jiaokenew->getdata("mobile",$data);
+                    //判断返回值
+                    if($out == "500")
+                    {
+                        $this->apiclass->response($out);
+                    }
+                    else
+                    {
+                        $arr = json_decode($out,true);
+                        $code = !empty($arr["code"])?$arr["code"]:null;
+                        //var_dump($arr);
+                        //判断返回json
+                        if ($code == 200)
+                        {
+
+                            $result = "";
+                            //$state = $result["state"];
+                            //var_dump($result);
+                            $ischarge = 0;
+                            switch ($arr["data"])
+                            {
+                                case  "0":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>"一致",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "1":
+                                    $state = "1101";
+                                    $result = array(
+                                        "result"=>"不一致",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "2":
+                                    $state = "1102";
+                                    $result = array(
+                                        "result"=>"库中无此号",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                default:
+                                    $this->apiclass->response(500);
+                                    return;
+                            }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"jiaokemobile");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        else
+                        {
+                            $this->apiclass->response(500);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $this->apiclass->response($code);
+            }
+        }
+        catch (Exception $e)
+        {
+            log_message('error',$e->getMessage());
+            $this->apiclass->response(500);
+        }
+    }
+
+
 
 }
