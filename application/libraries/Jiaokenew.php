@@ -71,10 +71,6 @@ class Jiaokenew {
             $data_string =  json_encode($postdata,JSON_UNESCAPED_UNICODE);
 
 
-            var_dump($data_string);
-            return "500";
-            //log_message('info',"111");
-            //print_r($data_string);
             $ch = curl_init();
             curl_setopt($ch,CURLOPT_URL,$this->url);
             curl_setopt($ch, CURLOPT_HEADER, false);

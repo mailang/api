@@ -518,7 +518,7 @@ class Api extends CI_Controller {
         }
     }
 
-    public function idnamecheck()
+    public function idnamecheckold()
     {
         try{
             //判断用户接口权限
@@ -2371,11 +2371,11 @@ class Api extends CI_Controller {
     }
 
 
-    public function tmptestdata(){
+    public function idnamecheck(){
         try{
             //判断用户接口权限
-//            $validitycode = $this->apiclass->validate();
-//            $code = is_numeric($validitycode)?$validitycode:1;
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
             $code = 1;
             if($code == 1)
             {
@@ -2409,18 +2409,19 @@ class Api extends CI_Controller {
                     else
                     {
                         $arr = json_decode($out,true);
-                        $code = !empty($arr["ResultCode"])?$arr["ResultCode"]:null;
+                        $code = !empty($arr["code"])?$arr["code"]:null;
                         //var_dump($arr);
                         //判断返回json
-                        if ($code)
+                        if ($code == 200)
                         {
+
                             $result = "";
                             //$state = $result["state"];
                             //var_dump($result);
                             $ischarge = 0;
-                            switch ($code)
+                            switch ($arr["data"])
                             {
-                                case  "1000":
+                                case  "1":
                                     $state = "1100";
                                     $result = array(
                                         "result"=>"一致",
@@ -2428,7 +2429,7 @@ class Api extends CI_Controller {
                                     );
                                     $ischarge = 1;
                                     break;
-                                case  "1001":
+                                case  "0":
                                     $state = "1101";
                                     $result = array(
                                         "result"=>"不一致",
@@ -2436,7 +2437,7 @@ class Api extends CI_Controller {
                                     );
                                     $ischarge = 1;
                                     break;
-                                case  "1002":
+                                case  "2":
                                     $state = "1102";
                                     $result = array(
                                         "result"=>"库中无此号",
@@ -2444,15 +2445,15 @@ class Api extends CI_Controller {
                                     );
                                     $ischarge = 0;
                                     break;
-                                case  "2005":
-                                    $state = "1103";
-                                    $result = array(
-                                        "result"=>"姓名或身份证错误",
-                                        "state"=>$state
-                                    );
-                                    $ischarge = 0;
-                                    break;
-                                case  "9001":
+//                                case  "2005":
+//                                    $state = "1103";
+//                                    $result = array(
+//                                        "result"=>"姓名或身份证错误",
+//                                        "state"=>$state
+//                                    );
+//                                    $ischarge = 0;
+//                                    break;
+                                case  "3":
                                     $state = "1104";
                                     $result = array(
                                         "result"=>"查询错误",
