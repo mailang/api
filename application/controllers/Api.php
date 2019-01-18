@@ -3009,7 +3009,6 @@ class Api extends CI_Controller {
 
                             $result = "";
                             //$state = $result["state"];
-                            var_dump($arr);
                             $ischarge = 0;
                             switch ($arr["data"])
                             {
