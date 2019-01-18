@@ -2040,7 +2040,7 @@ class Api extends CI_Controller {
         }
     }
 
-    public function mobilestatushj()
+    public function mobilestatushjbak()
     {
         try{
             //判断用户接口权限
@@ -2759,7 +2759,6 @@ class Api extends CI_Controller {
                         "name"=>$name,
                         "id_number"=>$idNo,
                         "bank_card_number"=>$bankcard
-
                     );
 
                     $this->load->library('jiaokenew');
@@ -2966,6 +2965,138 @@ class Api extends CI_Controller {
         }
     }
 
+    public function mobilestatushj(){
+        try{
+            //判断用户接口权限
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
+            $code = 1;
+            if($code == 1)
+            {
+                $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $data = json_decode($datajson,true);
+                $phone = !empty($data["phone"])?$data["phone"]:null;
+                //判断参数
+                if($phone == null)
+                {
+                    $code = 110;
+                    $this->apiclass->response($code);
+                }
+                else
+                {
+                    $data = array(
+                        "mobile"=>$phone
+                    );
 
+                    $this->load->library('jiaokenew');
+                    $out = $this->jiaokenew->getdata("cmccstatus",$data);
+                    //判断返回值
+                    if($out == "500")
+                    {
+                        $this->apiclass->response($out);
+                    }
+                    else
+                    {
+                        $arr = json_decode($out,true);
+                        $code = !empty($arr["code"])?$arr["code"]:null;
+                        //var_dump($arr);
+                        //判断返回json
+                        if ($code == 200)
+                        {
+
+                            $result = "";
+                            //$state = $result["state"];
+                            //var_dump($result);
+                            $ischarge = 0;
+                            switch ($arr["data"])
+                            {
+                                case  "1":
+                                    $resultmsg = $arr["msg"]["status"];
+                                    switch ($resultmsg)
+                                    {
+                                        case "1":
+                                            $state = "1100";
+                                            $result = array(
+                                                "result"=>"正常",
+                                                "state"=>$state
+                                            );
+                                            break;
+                                        case "2":
+                                            $state = "1101";
+                                            $result = array(
+                                                "result"=>"停机",
+                                                "state"=>$state
+                                            );
+                                            break;
+                                        case "3":
+                                            $state = "1102";
+                                            $result = array(
+                                                "result"=>"在网但不可用",
+                                                "state"=>$state
+                                            );
+                                            break;
+                                        case "4":
+                                            $state = "1103";
+                                            $result = array(
+                                                "result"=>"销号/未启用",
+                                                "state"=>$state
+                                            );
+                                            break;
+                                        case "5":
+                                            $state = "1104";
+                                            $result = array(
+                                                "result"=>"预销号",
+                                                "state"=>$state
+                                            );
+                                            break;
+                                        case "6":
+                                        default:
+                                            $state = "1105";
+                                            $result = array(
+                                                "result"=>"异常(号码状态异常)",
+                                                "state"=>$state
+                                            );
+                                            break;
+                                    }
+                                    $ischarge = 1;
+                                    break;
+                                case  "2":
+                                    $state = "1106";
+                                    $result = array(
+                                        "result"=>"未查到",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                default:
+                                    $this->apiclass->response(500);
+                                    return;
+                            }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"jiaokecmccstatushj");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        else
+                        {
+                            $this->apiclass->response(500);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $this->apiclass->response($code);
+            }
+        }
+        catch (Exception $e)
+        {
+            log_message('error',$e->getMessage());
+            $this->apiclass->response(500);
+        }
+    }
 
 }
