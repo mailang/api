@@ -2512,7 +2512,7 @@ class Api extends CI_Controller {
                     );
 
                     $this->load->library('jiaokenew');
-                    $out = $this->jiaoke->getdata("idphoto",$data);
+                    $out = $this->jiaokenew->getdata("idphoto",$data);
                     //判断返回值
                     if($out == "500")
                     {
