@@ -3014,7 +3014,10 @@ class Api extends CI_Controller {
                             {
                                 case  "1":
                                     $msg = json_decode($arr["msg"]);
+                                    var_dump($msg);
+
                                     $resultmsg = $msg["status"];
+                                    var_dump($resultmsg);
                                     switch ($resultmsg)
                                     {
                                         case "1":
