@@ -51,21 +51,28 @@ class Jiaokenew {
             }
 
 
-            $data["appSecret"] = "6E7B4149CCB50522E92BFE205D60C9A413D057EB";
-            ksort($data);
+            $sign = $data;
+
+            $sign["appSecret"] = "6E7B4149CCB50522E92BFE205D60C9A413D057EB";
+            ksort($sign);
 
             $arr2 = [];
-            foreach ($data as $key=> $value){
-                $string[] = $key.'='.$value;
+            foreach ($sign as $key=> $value){
+                $arr2[] = $key.'='.$value;
             }
 
-            $datastr = implode("&",$arr2);
+            $signstr = strtoupper(md5(implode("&",$arr2)));
 
-            var_dump($datastr);
-            return "500";
-            $postdata->data = $datastr;
+            $data["sign"] = $signstr;
+
+
+            $postdata->data = $data;
 
             $data_string =  json_encode($postdata,JSON_UNESCAPED_UNICODE);
+
+
+            var_dump($data_string);
+            return "500";
             //log_message('info',"111");
             //print_r($data_string);
             $ch = curl_init();
