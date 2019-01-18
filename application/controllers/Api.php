@@ -3009,7 +3009,7 @@ class Api extends CI_Controller {
 
                             $result = "";
                             //$state = $result["state"];
-                            //var_dump($result);
+                            var_dump($arr);
                             $ischarge = 0;
                             switch ($arr["data"])
                             {
@@ -3053,13 +3053,15 @@ class Api extends CI_Controller {
                                             );
                                             break;
                                         case "6":
-                                        default:
                                             $state = "1105";
                                             $result = array(
                                                 "result"=>"异常(号码状态异常)",
                                                 "state"=>$state
                                             );
                                             break;
+                                        default:
+                                            $this->apiclass->response(500);
+                                            return;
                                     }
                                     $ischarge = 1;
                                     break;
