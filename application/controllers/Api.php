@@ -2394,18 +2394,13 @@ class Api extends CI_Controller {
                 }
                 else
                 {
-                    $arrdata = array(
-                        "id_number"=>$idNo,
-                        "name"=>$name
+                    $data = array(
+                        "name"=>$name,
+                        "id_number"=>$idNo
                     );
 
-                    ksort($arrdata);
-                    $datastr = implode("&",$arrdata);
-
-                    var_dump($datastr);
-                    return;
-                    $this->load->library('jiaoke');
-                    $out = $this->jiaoke->getIDcheck($name,$idNo);
+                    $this->load->library('jiaokenew');
+                    $out = $this->jiaokenew->getdata("idcheck",$data);
                     //判断返回值
                     if($out == "500")
                     {

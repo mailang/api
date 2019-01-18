@@ -49,7 +49,21 @@ class Jiaoke {
                 default:
                     return "500";
             }
-            $postdata->data = $data;
+
+
+            $data["appSecret"] = "6E7B4149CCB50522E92BFE205D60C9A413D057EB";
+            ksort($data);
+
+            $arr2 = [];
+            foreach ($data as $key=> $value){
+                $string[] = $key.'='.$value;
+            }
+
+            $datastr = implode("&",$arr2);
+
+            var_dump($datastr);
+            return "500";
+            $postdata->data = $datastr;
 
             $data_string =  json_encode($postdata,JSON_UNESCAPED_UNICODE);
             //log_message('info',"111");
