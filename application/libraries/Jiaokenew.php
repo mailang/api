@@ -3,7 +3,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Jiaokenew {
-    private $url = "http://api.jkcredit.com:58080/gateway?api=credit.sec.da";
+    private $url = "http://api.jkcredit.com:58080/gateway?api=credit.sec.data";
 
     function getdata($api,$data)
     {
