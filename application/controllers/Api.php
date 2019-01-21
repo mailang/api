@@ -2774,7 +2774,7 @@ class Api extends CI_Controller {
                         $code = !empty($arr["code"])?$arr["code"]:null;
                         //var_dump($arr);
                         //判断返回json
-                        if ($code == 200)
+                        if ($code)
                         {
 
                             $result = "";
@@ -2783,7 +2783,7 @@ class Api extends CI_Controller {
                             $ischarge = 0;
                             switch ($arr["data"])
                             {
-                                case  "0":
+                                case  "2000":
                                     $state = "1100";
                                     $result = array(
                                         "result"=>"一致",
@@ -2791,7 +2791,8 @@ class Api extends CI_Controller {
                                     );
                                     $ischarge = 1;
                                     break;
-                                case  "1":
+                                case  "2001":
+                                case  "2002":
                                     $state = "1101";
                                     $result = array(
                                         "result"=>"不一致",
@@ -2799,25 +2800,13 @@ class Api extends CI_Controller {
                                     );
                                     $ischarge = 1;
                                     break;
-                                case  "2":
-                                    switch ($arr["msg"]){
-                                        case "查询成功，查无结果":
-                                            $state = "1102";
-                                            $result = array(
-                                                "result"=>"库中无此号",
-                                                "state"=>$state
-                                            );
-                                            $ischarge = 0;
-                                            break;
-                                        default:
-                                            $state = "1103";
-                                            $result = array(
-                                                "result"=>"查询失败",
-                                                "state"=>$state
-                                            );
-                                            $ischarge = 0;
-                                            break;
-                                    }
+                                case  "2011":
+                                    $state = "1102";
+                                    $result = array(
+                                        "result"=>"库中无此号",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
                                     break;
                                 default:
                                     $this->apiclass->response(500);
@@ -2892,7 +2881,7 @@ class Api extends CI_Controller {
                         $code = !empty($arr["code"])?$arr["code"]:null;
                         //var_dump($arr);
                         //判断返回json
-                        if ($code == 200)
+                        if ($code)
                         {
 
                             $result = "";
@@ -2901,7 +2890,7 @@ class Api extends CI_Controller {
                             $ischarge = 0;
                             switch ($arr["data"])
                             {
-                                case  "0":
+                                case  "2000":
                                     $state = "1100";
                                     $result = array(
                                         "result"=>"一致",
@@ -2909,7 +2898,8 @@ class Api extends CI_Controller {
                                     );
                                     $ischarge = 1;
                                     break;
-                                case  "1":
+                                case  "2001":
+                                case  "2002":
                                     $state = "1101";
                                     $result = array(
                                         "result"=>"不一致",
@@ -2917,25 +2907,13 @@ class Api extends CI_Controller {
                                     );
                                     $ischarge = 1;
                                     break;
-                                case  "2":
-                                    switch ($arr["msg"]){
-                                        case "查询成功，查无结果":
-                                            $state = "1102";
-                                            $result = array(
-                                                "result"=>"库中无此号",
-                                                "state"=>$state
-                                            );
-                                            $ischarge = 0;
-                                            break;
-                                        default:
-                                            $state = "1103";
-                                            $result = array(
-                                                "result"=>"查询失败",
-                                                "state"=>$state
-                                            );
-                                            $ischarge = 0;
-                                            break;
-                                    }
+                                case  "2011":
+                                    $state = "1102";
+                                    $result = array(
+                                        "result"=>"库中无此号",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
                                     break;
                                 default:
                                     $this->apiclass->response(500);
