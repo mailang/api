@@ -2781,7 +2781,7 @@ class Api extends CI_Controller {
                             //$state = $result["state"];
                             //var_dump($result);
                             $ischarge = 0;
-                            switch ($arr["data"])
+                            switch ($arr["code"])
                             {
                                 case  "2000":
                                     $state = "1100";
@@ -2888,7 +2888,7 @@ class Api extends CI_Controller {
                             //$state = $result["state"];
                             //var_dump($result);
                             $ischarge = 0;
-                            switch ($arr["data"])
+                            switch ($arr["code"])
                             {
                                 case  "2000":
                                     $state = "1100";
@@ -2988,7 +2988,7 @@ class Api extends CI_Controller {
                             $result = "";
                             //$state = $result["state"];
                             $ischarge = 0;
-                            switch ($arr["data"])
+                            switch ($arr["code"])
                             {
                                 case  "1":
                                     $msg = json_decode($arr["msg"],true);
