@@ -2376,7 +2376,6 @@ class Api extends CI_Controller {
             //判断用户接口权限
             $validitycode = $this->apiclass->validate();
             $code = is_numeric($validitycode)?$validitycode:1;
-            $code = 1;
             if($code == 1)
             {
                 $datajson = file_get_contents('php://input');
