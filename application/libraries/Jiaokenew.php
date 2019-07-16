@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Jiaokenew {
     private $url = "http://api.jkcredit.com:58080/gateway?api=credit.sec.data";
 
-    function getdata($api,$data)
+    function getdata($api,$data,$time=5)
     {
         try
         {
@@ -77,7 +77,7 @@ class Jiaokenew {
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POST,true);
             curl_setopt($ch, CURLOPT_POSTFIELDS,$data_string);
-            curl_setopt($ch, CURLOPT_TIMEOUT,5);
+            curl_setopt($ch, CURLOPT_TIMEOUT,$time);
             curl_setopt($ch, CURLOPT_HTTPHEADER,array(
                 'Content-Type: application/json; charset=utf-8',
             ));
