@@ -148,7 +148,7 @@ class Apiclass {
         }
     }
 
-    public function isTelcom($phone){
+    public function isTelecom($phone){
         if (preg_match($this->ct,$phone)){
             return true;
         }else{

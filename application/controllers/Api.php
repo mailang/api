@@ -30,13 +30,6 @@ class Api extends CI_Controller {
         $this->load->view('admin/login.html');
     }
 
-    public function test()
-    {
-        $phone = "18019900707";
-        echo $this->apiclass->isMobile("$phone");
-        echo $this->apiclass->isTelcom("$phone");
-        echo $this->apiclass->isUnicom("$phone");
-    }
 
     public function twncard()
     {
@@ -1412,6 +1405,19 @@ class Api extends CI_Controller {
                 }
                 else
                 {
+                    if (!$this->apiclass->isMobile($phone)){
+                        $state = "1103";
+                        $result = array(
+                            "result"=>"参数错误",
+                            "state"=>$state
+                        );
+                        $ischarge = 0;
+                        $code = "100";
+                        $orderno = $this->apiclass->createorderno();
+                        $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"zhongchengxingetmobile");
+                        $this->apiclass->response($code,$result,$orderno);
+                    }
+
                     $this->benchmark->mark('curl_start');
                     $time2 = $this->benchmark->elapsed_time('function_start', 'curl_start');
                     log_message('info',$time2);
@@ -3309,6 +3315,7 @@ class Api extends CI_Controller {
         }
     }
 
+
     public function telecomhj()
     {
         try{
@@ -3336,6 +3343,18 @@ class Api extends CI_Controller {
                 }
                 else
                 {
+                    if (!$this->apiclass->isTelecom($phone)){
+                        $state = "1103";
+                        $result = array(
+                            "result"=>"参数错误",
+                            "state"=>$state
+                        );
+                        $ischarge = 0;
+                        $code = "100";
+                        $orderno = $this->apiclass->createorderno();
+                        $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"zhongchengxingettelecom");
+                        $this->apiclass->response($code,$result,$orderno);
+                    }
                     $this->benchmark->mark('curl_start');
                     $time2 = $this->benchmark->elapsed_time('function_start', 'curl_start');
                     log_message('info',$time2);
@@ -3471,6 +3490,18 @@ class Api extends CI_Controller {
                 }
                 else
                 {
+                    if (!$this->apiclass->isUnicom($phone)){
+                        $state = "1103";
+                        $result = array(
+                            "result"=>"参数错误",
+                            "state"=>$state
+                        );
+                        $ischarge = 0;
+                        $code = "100";
+                        $orderno = $this->apiclass->createorderno();
+                        $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"zhongchengxingetunicom");
+                        $this->apiclass->response($code,$result,$orderno);
+                    }
                     $this->benchmark->mark('curl_start');
                     $time2 = $this->benchmark->elapsed_time('function_start', 'curl_start');
                     log_message('info',$time2);
@@ -3578,5 +3609,7 @@ class Api extends CI_Controller {
             $this->apiclass->response(500);
         }
     }
+
+
 
 }
