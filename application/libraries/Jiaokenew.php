@@ -46,6 +46,15 @@ class Jiaokenew {
                 case 'ctccstatus':
                     $postdata->api = "CTCC_STATUS_CHECK";
                     break;
+                case 'banktwoinfo':
+                    $postdata->api = "BANK_TWO_INFO_V3";
+                    break;
+                case 'bankthreeinfo':
+                    $postdata->api = "BANK_THREE_INFO_V3";
+                    break;
+                case 'banktfourinfo':
+                    $postdata->api = "BANK_FOUR_INFO_V3";
+                    break;
                 default:
                     return "500";
             }
