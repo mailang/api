@@ -1406,6 +1406,7 @@ class Api extends CI_Controller {
                 else
                 {
                     if (!$this->apiclass->isMobile($phone)){
+                        echo "false0";
                         $state = "1103";
                         $result = array(
                             "result"=>"参数错误",
