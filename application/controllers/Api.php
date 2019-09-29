@@ -1406,7 +1406,6 @@ class Api extends CI_Controller {
                 else
                 {
                     if (!$this->apiclass->isMobile($phone)){
-                        echo "false0";
                         $state = "1103";
                         $result = array(
                             "result"=>"参数错误",
@@ -1417,7 +1416,7 @@ class Api extends CI_Controller {
                         $orderno = $this->apiclass->createorderno();
                         $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"zhongchengxingetmobile");
                         $this->apiclass->response($code,$result,$orderno);
-                    }
+                        return;                    }
 
                     $this->benchmark->mark('curl_start');
                     $time2 = $this->benchmark->elapsed_time('function_start', 'curl_start');
@@ -3355,6 +3354,7 @@ class Api extends CI_Controller {
                         $orderno = $this->apiclass->createorderno();
                         $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"zhongchengxingettelecom");
                         $this->apiclass->response($code,$result,$orderno);
+                        return;
                     }
                     $this->benchmark->mark('curl_start');
                     $time2 = $this->benchmark->elapsed_time('function_start', 'curl_start');
@@ -3502,6 +3502,7 @@ class Api extends CI_Controller {
                         $orderno = $this->apiclass->createorderno();
                         $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"zhongchengxingetunicom");
                         $this->apiclass->response($code,$result,$orderno);
+                        return;
                     }
                     $this->benchmark->mark('curl_start');
                     $time2 = $this->benchmark->elapsed_time('function_start', 'curl_start');
