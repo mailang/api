@@ -144,6 +144,7 @@ class Apiclass {
         if (preg_match($this->cm,$phone)){
             return true;
         }else{
+            echo "false";
             return false;
         }
     }
