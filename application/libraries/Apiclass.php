@@ -140,7 +140,7 @@ class Apiclass {
     }
 
     public function isMobile($phone){
-        if (preg_match($this->CHINA_MOBILE_PATTERN)){
+        if (preg_match($this->CHINA_MOBILE_PATTERN,$phone)){
             return true;
         }else{
             return false;
@@ -148,7 +148,7 @@ class Apiclass {
     }
 
     public function isTelcom($phone){
-        if (preg_match($this->CHINA_TELECOM_PATTERN)){
+        if (preg_match($this->CHINA_TELECOM_PATTERN,$phone)){
             return true;
         }else{
             return false;
@@ -156,7 +156,7 @@ class Apiclass {
     }
 
     public function isUnicom($phone){
-        if (preg_match($this->CHINA_UNICOM_PATTERN)){
+        if (preg_match($this->CHINA_UNICOM_PATTERN,$phone)){
             return true;
         }else{
             return false;
