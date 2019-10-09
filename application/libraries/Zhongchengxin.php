@@ -117,7 +117,7 @@ class Zhongchengxin {
     public function mobilestatus($phone)
     {
         try {
-            $protocol_data_type_name = "phoneNetworkPeriods";
+            $protocol_data_type_name = "phoneNetworkStatus";
             $arr = array(
                 'id_no' => "12022219990101925x",
                 'protocol_data_type_name' => array($protocol_data_type_name),
