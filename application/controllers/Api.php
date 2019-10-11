@@ -3232,7 +3232,7 @@ class Api extends CI_Controller {
                     );
 
                     $this->load->library('zhongsheng');
-                    $out = $this->zhongsheng->getdata("businessthree",$data);
+                    $out = $this->zhongsheng->getdata("gongshangthree",$data);
                     //判断返回值
                     if($out == "500")
                     {
