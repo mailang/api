@@ -68,7 +68,7 @@ class Zhongsheng {
         ));
         $out = curl_exec($ch);
         log_message('info',$datastr."---curlarr---time:".date("Y-m-d H:i:s"));
-        
+
         if(curl_errno($ch))
         {
             log_message('error',$datastr."---curlerr---time:".date("Y-m-d H:i:s"));
