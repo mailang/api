@@ -3249,7 +3249,7 @@ class Api extends CI_Controller {
                         //$code = !empty($arr["code"])?$arr["code"]:null;
                         //var_dump($arr);
                         //判断返回json
-                        if (!$resultinfo)
+                        if ($resultinfo)
                         {
                             echo "runin";
                             $resultinfoarr =  json_decode($resultinfo,true);
