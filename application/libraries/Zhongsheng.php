@@ -67,11 +67,11 @@ class Zhongsheng {
             'Content-Type: application/x-www-form-urlencoded'
         ));
         $out = curl_exec($ch);
-        log_message('info',$poststr."---curlarr---time:".date("Y-m-d H:i:s"));
+        log_message('info',$datastr."---curlarr---time:".date("Y-m-d H:i:s"));
         $out = "";
         if(curl_errno($ch))
         {
-            log_message('error',$poststr."---curlerr---time:".date("Y-m-d H:i:s"));
+            log_message('error',$datastr."---curlerr---time:".date("Y-m-d H:i:s"));
             return "500";
         }
         curl_close($ch);
@@ -89,7 +89,7 @@ class Zhongsheng {
 }
 
 class postdata{
-    public $account = "xly_zz"; //账号
-    public $password = "zsxytest0810";//密码
+    public $account = "yszh"; //账号
+    public $password = "E6gODz86";//密码
     public $url = "http://apt.zhixin.net:8711/wndc_newapi";// 测试地址
 }
