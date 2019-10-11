@@ -3,7 +3,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Zhongsheng {
-    function geturl($api,$data,$time = 5){
+    function getdata($api,$data,$time = 5){
 
         $zsapi = "";
         switch ($api) {
