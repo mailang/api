@@ -3220,6 +3220,7 @@ class Api extends CI_Controller {
                 //判断参数
                 if($name == null || $companyname == null || $usccode == null)
                 {
+                    echo $name.$companyname.$usccode;
                     $code = 110;
                     $this->apiclass->response($code);
                 }
