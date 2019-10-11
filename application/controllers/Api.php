@@ -3251,7 +3251,7 @@ class Api extends CI_Controller {
                         //判断返回json
                         if (!$resultinfo)
                         {
-                            $resultinfoarr =  json_decode($out,true);
+                            $resultinfoarr =  json_decode($resultinfo,true);
                             var_dump($resultinfoarr);
                             $ischarge = 0;
                             echo $resultinfoarr["statcode"];
