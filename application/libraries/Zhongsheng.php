@@ -53,6 +53,8 @@ class Zhongsheng {
         $enjson = json_encode($datao,JSON_UNESCAPED_UNICODE);
         $datastr = "actionName=".$actionname."&encrypt=2&api=s&params=".base64_encode(urlencode($enjson));
 
+        echo $datastr;
+        exit();
 
         $ch = curl_init();
         curl_setopt($ch,CURLOPT_URL,$postdata->url);
