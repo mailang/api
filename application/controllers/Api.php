@@ -3220,9 +3220,6 @@ class Api extends CI_Controller {
                 //判断参数
                 if($name == null || $companyname == null || $usccode == null)
                 {
-                    echo "test";
-                    echo $name.$companyname.$usccode;
-                    exit();
                     $code = 110;
                     $this->apiclass->response($code);
                 }
@@ -3235,7 +3232,7 @@ class Api extends CI_Controller {
                     );
 
                     $this->load->library('zhongsheng');
-                    $out = $this->jiaokenew->getdata("businessthree",$data);
+                    $out = $this->zhongsheng->getdata("businessthree",$data);
                     //判断返回值
                     if($out == "500")
                     {
