@@ -53,8 +53,8 @@ class Zhongsheng {
         $enjson = json_encode($datao,JSON_UNESCAPED_UNICODE);
         $datastr = "actionName=".$actionname."&encrypt=2&api=s&params=".base64_encode(urlencode($enjson));
 
-        echo $datastr;
-        exit();
+        //echo $datastr;
+        //exit();
 
         $ch = curl_init();
         curl_setopt($ch,CURLOPT_URL,$postdata->url);
@@ -67,15 +67,15 @@ class Zhongsheng {
             'Content-Type: application/x-www-form-urlencoded'
         ));
         $out = curl_exec($ch);
-        //log_message('info',$poststr."---curlarr---time:".date("Y-m-d H:i:s"));
-        //$out = "";
+        log_message('info',$poststr."---curlarr---time:".date("Y-m-d H:i:s"));
+        $out = "";
         if(curl_errno($ch))
         {
-            //log_message('error',$poststr."---curlerr---time:".date("Y-m-d H:i:s"));
+            log_message('error',$poststr."---curlerr---time:".date("Y-m-d H:i:s"));
             return "500";
         }
         curl_close($ch);
-        //log_message('info','source返回:'.$out);
+        log_message('info','source返回:'.$out);
         return $out;
     }
 
