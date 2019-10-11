@@ -3232,7 +3232,8 @@ class Api extends CI_Controller {
                     );
 
                     $this->load->library('zhongsheng');
-                    $out = $this->zhongsheng->getdata("gongshangthree",$data);
+                    //$out = $this->zhongsheng->getdata("gongshangthree",$data);
+                    $out = '{"queryInfo":"JTdCJTIybGVnYWxfcGVyc29uX25hbWUlMjIlM0ElMjIlRTYlOUIlQjklRTUlQUUlOEYlRTUlQkQlQUMlMjIlMkMlMjJjb21wYW55X25hbWUlMjIlM0ElMjIlRTUlOEMlOTclRTQlQkElQUMlRTYlOTYlQjAlRTUlOEQlOEUlRTUlQUUlODklRTUlQkUlQkQlRTYlOTUlQjAlRTYlOEQlQUUlRTYlOUMlOEQlRTUlOEElQTElRTYlOUMlODklRTklOTklOTAlRTUlODUlQUMlRTUlOEYlQjglMjIlMkMlMjJ1c2NfY29kZSUyMiUzQSUyMjkxMzQwMTAwMDg3NTU3MjIyMyUyMiU3RA==","resultInfo":"{\"sessionId\":\"c62d22f3e1910120009592270f\",\"statcode\":1600,\"state\":\"一致\"}"}';
                     //判断返回值
                     if($out == "500")
                     {
@@ -3244,6 +3245,7 @@ class Api extends CI_Controller {
 
                         $resultinfo = !empty($arr["resultInfo"])?$arr["resultInfo"]:null;
 
+                        echo $resultinfo;
                         //$code = !empty($arr["code"])?$arr["code"]:null;
                         //var_dump($arr);
                         //判断返回json
@@ -3251,6 +3253,7 @@ class Api extends CI_Controller {
                         {
                             $resultinfoarr =  json_decode($out,true);
                             $ischarge = 0;
+                            echo $resultinfoarr["statcode"];
                             switch ($resultinfoarr["statcode"])
                             {
                                 case  "1600":
