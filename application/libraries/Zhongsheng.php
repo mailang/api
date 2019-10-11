@@ -35,10 +35,10 @@ class Zhongsheng {
 
 
         $queryInfo = $data;
-        $order = $this->getorder();
+
 
         $postdata = new postdata();
-
+        $order = $this->getorder($postdata->account);
         $baseInfo = array(
             "account" => $postdata->account,
             "order" => $order,
