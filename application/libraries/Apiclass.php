@@ -95,7 +95,7 @@ class Apiclass {
     {
         $time = date("Y-m-d H:i:s");
         //$orderno = $this->createorderno();
-        $this->CI->api_model->insertorder($orderno,$userid,$proid,$detail,$ischarge,$state,$time);
+        $this->CI->api_model->insertorder($orderno,$userid,$proid,$detail,$ischarge,$state,$apistatis,$time);
         $this->CI->api_model->updateuserpro($userproid,$ischarge,$time);
         $this->CI->api_model->updatestatis($apistatis,$time);
     }
