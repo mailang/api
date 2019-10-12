@@ -3355,7 +3355,6 @@ class Api extends CI_Controller {
                         //判断返回json
                         if ($resultinfo)
                         {
-
                             $resultinfoarr =  json_decode($resultinfo,true);
 
                             switch ($resultinfoarr["statcode"])
