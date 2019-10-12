@@ -3322,11 +3322,11 @@ class Api extends CI_Controller {
                 $datajson = $this->apiclass->decrypt($datajson);
                 log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
                 $data = json_decode($datajson,true);
-                $key = !empty($data["key"])?$data["key"]:null;
+                $companyname = !empty($data["companyname"])?$data["companyname"]:null;
 
 
                 //判断参数
-                if($key == null)
+                if($companyname == null)
                 {
                     $code = 110;
                     $this->apiclass->response($code);
@@ -3334,7 +3334,7 @@ class Api extends CI_Controller {
                 else
                 {
                     $data = array(
-                        "key"=>$key,
+                        "key"=>$companyname,
                     );
 
                     $this->load->library('zhongsheng');
