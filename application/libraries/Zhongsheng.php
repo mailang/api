@@ -25,7 +25,7 @@ class Zhongsheng {
             case 'fangjia':
                 $actionname = "EstatesPriceSim";
                 break;
-            case 'company':
+            case 'companybasic':
                 $actionname = "compybasic";
                 break;
             default:
