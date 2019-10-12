@@ -3368,7 +3368,7 @@ class Api extends CI_Controller {
                                 case  "1600":
                                     $state = "1100";
                                     $result = array(
-                                        "result"=>$resultinfoarr["state"],
+                                        "result"=>json_decode($resultinfoarr["state"],true),
                                         "state"=>$state
                                     );
                                     $ischarge = 1;
@@ -3379,7 +3379,7 @@ class Api extends CI_Controller {
                                         "result"=>"查无数据",
                                         "state"=>$state
                                     );
-                                    $ischarge = 1;
+                                    $ischarge = 0;
                                     break;
                                 case  "1910":
                                     $state = "1102";
