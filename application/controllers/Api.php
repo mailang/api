@@ -3323,9 +3323,9 @@ class Api extends CI_Controller {
                 log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
                 $data = json_decode($datajson,true);
                 $name = !empty($data["name"])?$data["name"]:null;
-                $idNo = !empty($data["idNo"])?$data["idNo"]:null;
-                $companyname = !empty($data["companyname"])?$data["companyname"]:null;
-                $usccode = !empty($data["usccode"])?$data["usccode"]:null;
+                $idNo = !empty($data["idCard"])?$data["idCard"]:null;
+                $companyname = !empty($data["companyName"])?$data["companyName"]:null;N
+                $usccode = !empty($data["regNo"])?$data["regNo"]:null;
 
                 //判断参数
                 if($name == null || $idNo == null || $companyname == null || $usccode == null)
