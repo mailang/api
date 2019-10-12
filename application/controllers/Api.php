@@ -3232,8 +3232,7 @@ class Api extends CI_Controller {
                     );
 
                     $this->load->library('zhongsheng');
-                    //$out = $this->zhongsheng->getdata("gongshangthree",$data);
-                    $out = '{"queryInfo":"JTdCJTIybGVnYWxfcGVyc29uX25hbWUlMjIlM0ElMjIlRTYlOUIlQjklRTUlQUUlOEYlRTUlQkQlQUMlMjIlMkMlMjJjb21wYW55X25hbWUlMjIlM0ElMjIlRTUlOEMlOTclRTQlQkElQUMlRTYlOTYlQjAlRTUlOEQlOEUlRTUlQUUlODklRTUlQkUlQkQlRTYlOTUlQjAlRTYlOEQlQUUlRTYlOUMlOEQlRTUlOEElQTElRTYlOUMlODklRTklOTklOTAlRTUlODUlQUMlRTUlOEYlQjglMjIlMkMlMjJ1c2NfY29kZSUyMiUzQSUyMjkxMzQwMTAwMDg3NTU3MjIyMyUyMiU3RA==","resultInfo":"{\"sessionId\":\"c62d22f3e1910120009592270f\",\"statcode\":1600,\"state\":\"一致\"}"}';
+                    $out = $this->zhongsheng->getdata("gongshangthree",$data);
                     //判断返回值
                     if($out == "500")
                     {
@@ -3245,17 +3244,14 @@ class Api extends CI_Controller {
 
                         $resultinfo = !empty($arr["resultInfo"])?$arr["resultInfo"]:null;
 
-                        echo $resultinfo;
                         //$code = !empty($arr["code"])?$arr["code"]:null;
                         //var_dump($arr);
                         //判断返回json
                         if ($resultinfo)
                         {
-                            echo "runin";
+
                             $resultinfoarr =  json_decode($resultinfo,true);
-                            var_dump($resultinfoarr);
-                            $ischarge = 0;
-                            echo $resultinfoarr["statcode"];
+
                             switch ($resultinfoarr["statcode"])
                             {
                                 case  "1600":
@@ -3282,6 +3278,10 @@ class Api extends CI_Controller {
                                     );
                                     $ischarge = 0;
                                     break;
+                                case  "2203":
+                                    $code = 110;
+                                    $this->apiclass->response($code);
+                                    break;
                                 default:
                                     $this->apiclass->response(500);
                                     return;
@@ -3289,6 +3289,118 @@ class Api extends CI_Controller {
                             $code = "100";
                             $orderno = $this->apiclass->createorderno();
                             $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"zhongshengbankthree");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        else
+                        {
+                            $this->apiclass->response(500);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $this->apiclass->response($code);
+            }
+        }
+        catch (Exception $e)
+        {
+            log_message('error',$e->getMessage());
+            $this->apiclass->response(500);
+        }
+    }
+
+    public function businessfour(){
+        try{
+            //判断用户接口权限
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
+            if($code == 1)
+            {
+                $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $data = json_decode($datajson,true);
+                $name = !empty($data["name"])?$data["name"]:null;
+                $idNo = !empty($data["idNo"])?$data["idNo"]:null;
+                $companyname = !empty($data["companyname"])?$data["companyname"]:null;
+                $usccode = !empty($data["usccode"])?$data["usccode"]:null;
+
+                //判断参数
+                if($name == null || $idNo == null || $companyname == null || $usccode == null)
+                {
+                    $code = 110;
+                    $this->apiclass->response($code);
+                }
+                else
+                {
+                    $data = array(
+                        "companyName"=>$companyname,
+                        "name"=>$name,
+                        "regNo"=>$usccode,
+                        "idCard"=>$idNo
+                    );
+
+                    $this->load->library('zhongsheng');
+                    $out = $this->zhongsheng->getdata("gongshangfour",$data);
+                    //判断返回值
+                    if($out == "500")
+                    {
+                        $this->apiclass->response($out);
+                    }
+                    else
+                    {
+                        $arr = json_decode($out,true);
+
+                        $resultinfo = !empty($arr["resultInfo"])?$arr["resultInfo"]:null;
+
+                        //$code = !empty($arr["code"])?$arr["code"]:null;
+                        //var_dump($arr);
+                        //判断返回json
+                        if ($resultinfo)
+                        {
+
+                            $resultinfoarr =  json_decode($resultinfo,true);
+
+                            switch ($resultinfoarr["statcode"])
+                            {
+                                case  "1600":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>$resultinfoarr["state"],
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "1601":
+                                    $state = "1101";
+                                    $result = array(
+                                        "result"=>"查无数据",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "1910":
+                                    $state = "1102";
+                                    $result = array(
+                                        "result"=>"无效的公司名称或注册号",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "2202":
+                                case  "2203":
+                                    $code = 110;
+                                    $this->apiclass->response($code);
+                                    break;
+                                default:
+                                    $this->apiclass->response(500);
+                                    return;
+                            }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"zhongshengbankfour");
                             $this->apiclass->response($code,$result,$orderno);
                         }
                         else
