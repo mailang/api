@@ -3324,7 +3324,7 @@ class Api extends CI_Controller {
                 $data = json_decode($datajson,true);
                 $name = !empty($data["name"])?$data["name"]:null;
                 $idNo = !empty($data["idCard"])?$data["idCard"]:null;
-                $companyname = !empty($data["companyName"])?$data["companyName"]:null;N
+                $companyname = !empty($data["companyName"])?$data["companyName"]:null;
                 $usccode = !empty($data["regNo"])?$data["regNo"]:null;
 
                 //判断参数
