@@ -28,6 +28,24 @@ class Zhongsheng {
             case 'companybasic':
                 $actionname = "compybasic";
                 break;
+            case 'sxperson':
+                $actionname = 'sxpersonc';
+                break;
+            case 'sxcompany':
+                $actionname = 'sxcompanyc';
+                break;
+            case 'ocridcard':
+                $actionname = "idCardOCR";
+                break;
+            case 'ocrbank':
+                $actionname = "bankocr";
+                break;
+            case 'orcvehicle':
+                $actionname = "driveLicenseOCR";
+                break;
+            case 'ocrbusiness':
+                $actionname = "businessOCR";
+                break;
             default:
                 return "500";
         }
@@ -42,7 +60,7 @@ class Zhongsheng {
         $baseInfo = array(
             "account" => $postdata->account,
             "order" => $order,
-            "sign" => strtoupper(substr(md5($postdata->account.$postdata->password.json_encode($queryInfo,JSON_UNESCAPED_UNICODE).$order),8,16))
+            "sign" => strtoupper(substr(md5($postdata->account.$postdata->password.json_encode($queryInfo,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES).$order),8,16))
         );
 
         $datao = array(
@@ -50,7 +68,7 @@ class Zhongsheng {
             "queryInfo" => $queryInfo
         );
 
-        $enjson = json_encode($datao,JSON_UNESCAPED_UNICODE);
+        $enjson = json_encode($datao,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         $datastr = "actionName=".$actionname."&encrypt=2&api=s&params=".base64_encode(urlencode($enjson));
 
         //echo $datastr;

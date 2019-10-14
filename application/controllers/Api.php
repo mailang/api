@@ -3838,4 +3838,515 @@ class Api extends CI_Controller {
             $this->apiclass->response(500);
         }
     }
+
+    public function sxperson(){
+        try{
+            //判断用户接口权限
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
+            if($code == 1)
+            {
+                $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $data = json_decode($datajson,true);
+                $idNo = !empty($data["idNo"])?$data["idNo"]:null;
+
+
+                //判断参数
+                if($idNo == null)
+                {
+                    $code = 110;
+                    $this->apiclass->response($code);
+                }
+                else
+                {
+
+                    $data = array(
+                        "idCard"=>$idNo,
+                    );
+
+                    $this->load->library('zhongsheng');
+                    $out = $this->zhongsheng->getdata("sxperson",$data);
+                    //判断返回值
+                    if($out == "500")
+                    {
+                        $this->apiclass->response($out);
+                    }
+                    else
+                    {
+                        $arr = json_decode($out,true);
+
+                        $resultinfo = !empty($arr["resultInfo"])?$arr["resultInfo"]:null;
+
+                        //$code = !empty($arr["code"])?$arr["code"]:null;
+                        //var_dump($arr);
+                        //判断返回json
+                        if ($resultinfo)
+                        {
+
+                            $resultinfoarr =  json_decode($resultinfo,true);
+
+                            switch ($resultinfoarr["statcode"])
+                            {
+                                case  "1800":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>json_decode($resultinfoarr["state"],true),
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "1801":
+                                    $state = "1101";
+                                    $result = array(
+                                        "result"=>"查无数据",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "2203":
+                                case  "2018":
+                                    $code = 110;
+                                    $this->apiclass->response($code);
+                                    break;
+                                default:
+                                    $this->apiclass->response(500);
+                                    return;
+                            }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"zhongshengsxperson");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        else
+                        {
+                            $this->apiclass->response(500);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $this->apiclass->response($code);
+            }
+        }
+        catch (Exception $e)
+        {
+            log_message('error',$e->getMessage());
+            $this->apiclass->response(500);
+        }
+    }
+
+    public function sxcompany(){
+        try{
+            //判断用户接口权限
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
+            if($code == 1)
+            {
+                $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $data = json_decode($datajson,true);
+                $key = !empty($data["key"])?$data["key"]:null;
+                $keyType = !empty($data["keytype"])?$data["keytype"]:null;
+
+
+
+                //判断参数
+                if($key == null || $keyType == null)
+                {
+                    $code = 110;
+                    $this->apiclass->response($code);
+                }
+                else
+                {
+                    $data = array(
+                        "key"=>$key,
+                        "keyType"=>$keyType
+                    );
+                    $this->load->library('zhongsheng');
+                    $out = $this->zhongsheng->getdata("sxcompany",$data);
+                    //判断返回值
+                    if($out == "500")
+                    {
+                        $this->apiclass->response($out);
+                    }
+                    else
+                    {
+                        $arr = json_decode($out,true);
+
+                        $resultinfo = !empty($arr["resultInfo"])?$arr["resultInfo"]:null;
+
+                        //$code = !empty($arr["code"])?$arr["code"]:null;
+                        //var_dump($arr);
+                        //判断返回json
+                        if ($resultinfo)
+                        {
+
+                            $resultinfoarr =  json_decode($resultinfo,true);
+
+                            switch ($resultinfoarr["statcode"])
+                            {
+                                case  "1800":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>json_decode($resultinfoarr["state"],true),
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "1801":
+                                    $state = "1101";
+                                    $result = array(
+                                        "result"=>"查无数据",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "2202":
+                                case  "2203":
+                                case  "2018":
+                                    $code = 110;
+                                    $this->apiclass->response($code);
+                                    break;
+                                default:
+                                    $this->apiclass->response(500);
+                                    return;
+                            }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"zhongshengsxcompany");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        else
+                        {
+                            $this->apiclass->response(500);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $this->apiclass->response($code);
+            }
+        }
+        catch (Exception $e)
+        {
+            log_message('error',$e->getMessage());
+            $this->apiclass->response(500);
+        }
+    }
+
+    public function ocridcard(){
+        try{
+            //判断用户接口权限
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
+            if($code == 1)
+            {
+                $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $data = json_decode($datajson,true);
+                $photo = !empty($data["photo"])?$data["photo"]:null;
+                $imgType = !empty($data["imgtype"])?$data["imgtype"]:null;
+                $side = !empty($data["side"])?$data["side"]:null;
+
+                //判断参数
+                if($photo == null || $imgType == null || $side == null)
+                {
+                    $code = 110;
+                    $this->apiclass->response($code);
+                }
+                else
+                {
+                    $data = array(
+                        "imgB64A"=>$photo,
+                        "imgType"=>$imgType,
+                        "idCardSide"=>$side,
+                    );
+                    $this->load->library('zhongsheng');
+                    $out = $this->zhongsheng->getdata("ocridcard",$data);
+                    //判断返回值
+                    if($out == "500")
+                    {
+                        $this->apiclass->response($out);
+                    }
+                    else
+                    {
+                        $arr = json_decode($out,true);
+
+                        $resultinfo = !empty($arr["resultInfo"])?$arr["resultInfo"]:null;
+
+                        //$code = !empty($arr["code"])?$arr["code"]:null;
+                        //var_dump($arr);
+                        //判断返回json
+                        if ($resultinfo)
+                        {
+
+                            $resultinfoarr =  json_decode($resultinfo,true);
+
+                            switch ($resultinfoarr["statcode"])
+                            {
+                                case  "1700":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>json_decode($resultinfoarr["state"],true),
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "1790":
+                                    $state = "1101";
+                                    $result = array(
+                                        "result"=>"识别错误",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "1903":
+                                case  "1904":
+                                case  "1905":
+                                case  "1910":
+                                case  "2018":
+                                    $code = 110;
+                                    $this->apiclass->response($code);
+                                    break;
+                                default:
+                                    $this->apiclass->response(500);
+                                    return;
+                            }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"zhongshengocridcard");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        else
+                        {
+                            $this->apiclass->response(500);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $this->apiclass->response($code);
+            }
+        }
+        catch (Exception $e)
+        {
+            log_message('error',$e->getMessage());
+            $this->apiclass->response(500);
+        }
+    }
+
+    public function ocrbank(){
+        try{
+            //判断用户接口权限
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
+            if($code == 1)
+            {
+                $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $data = json_decode($datajson,true);
+                $photo = !empty($data["photo"])?$data["photo"]:null;
+                $imgType = !empty($data["imgtype"])?$data["imgtype"]:null;
+
+                //判断参数
+                if($photo == null || $imgType == null)
+                {
+                    $code = 110;
+                    $this->apiclass->response($code);
+                }
+                else
+                {
+                    $data = array(
+                        "imgB64"=>$photo,
+                        "imgType"=>$imgType
+                    );
+                    $this->load->library('zhongsheng');
+                    $out = $this->zhongsheng->getdata("ocrbank",$data);
+                    //判断返回值
+                    if($out == "500")
+                    {
+                        $this->apiclass->response($out);
+                    }
+                    else
+                    {
+                        $arr = json_decode($out,true);
+
+                        $resultinfo = !empty($arr["resultInfo"])?$arr["resultInfo"]:null;
+
+                        //$code = !empty($arr["code"])?$arr["code"]:null;
+                        //var_dump($arr);
+                        //判断返回json
+                        if ($resultinfo)
+                        {
+
+                            $resultinfoarr =  json_decode($resultinfo,true);
+
+                            switch ($resultinfoarr["statcode"])
+                            {
+                                case  "1600":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>json_decode($resultinfoarr["state"],true),
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "1690":
+                                    $state = "1101";
+                                    $result = array(
+                                        "result"=>"识别错误",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "1903":
+                                case  "1904":
+                                case  "1905":
+                                case  "1910":
+                                case  "2018":
+                                    $code = 110;
+                                    $this->apiclass->response($code);
+                                    break;
+                                default:
+                                    $this->apiclass->response(500);
+                                    return;
+                            }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"zhongshengocrbank");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        else
+                        {
+                            $this->apiclass->response(500);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $this->apiclass->response($code);
+            }
+        }
+        catch (Exception $e)
+        {
+            log_message('error',$e->getMessage());
+            $this->apiclass->response(500);
+        }
+    }
+
+    public function ocrbusiness(){
+        try{
+            //判断用户接口权限
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
+            if($code == 1)
+            {
+                $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $data = json_decode($datajson,true);
+                $photo = !empty($data["photo"])?$data["photo"]:null;
+                $imgType = !empty($data["imgtype"])?$data["imgtype"]:null;
+
+                //判断参数
+                if($photo == null || $imgType == null)
+                {
+                    $code = 110;
+                    $this->apiclass->response($code);
+                }
+                else
+                {
+                    $data = array(
+                        "imgString"=>$photo,
+                        "filename"=>"somefile".$imgType
+                    );
+                    $this->load->library('zhongsheng');
+                    $out = $this->zhongsheng->getdata("ocrbusiness",$data);
+                    //判断返回值
+                    if($out == "500")
+                    {
+                        $this->apiclass->response($out);
+                    }
+                    else
+                    {
+                        $arr = json_decode($out,true);
+
+                        $resultinfo = !empty($arr["resultInfo"])?$arr["resultInfo"]:null;
+
+                        //$code = !empty($arr["code"])?$arr["code"]:null;
+                        //var_dump($arr);
+                        //判断返回json
+                        if ($resultinfo)
+                        {
+
+                            $resultinfoarr =  json_decode($resultinfo,true);
+
+                            switch ($resultinfoarr["statcode"])
+                            {
+                                case  "1600":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>json_decode($resultinfoarr["state"],true),
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "1690":
+                                    $state = "1101";
+                                    $result = array(
+                                        "result"=>"识别错误",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case  "1903":
+                                case  "1904":
+                                case  "1905":
+                                case  "1910":
+                                case  "2018":
+                                    $code = 110;
+                                    $this->apiclass->response($code);
+                                    break;
+                                default:
+                                    $this->apiclass->response(500);
+                                    return;
+                            }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"zhongshengocrbusiness");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        else
+                        {
+                            $this->apiclass->response(500);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $this->apiclass->response($code);
+            }
+        }
+        catch (Exception $e)
+        {
+            log_message('error',$e->getMessage());
+            $this->apiclass->response(500);
+        }
+    }
+
 }
