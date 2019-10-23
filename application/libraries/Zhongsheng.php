@@ -40,7 +40,7 @@ class Zhongsheng {
             case 'ocrbank':
                 $actionname = "bankocr";
                 break;
-            case 'orcvehicle':
+            case 'ocrvehicle':
                 $actionname = "driveLicenseOCR";
                 break;
             case 'ocrbusiness':
