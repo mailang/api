@@ -80,6 +80,9 @@ class Tanzhen {
             case 'three':
                 $actionname = "api/threefactor/v2/verify?";
                 break;
+            case 'threemd5':
+                $actionname = "api/threefactor/md5/v2/verify?";
+                break;
             default:
                 return "500";
         }

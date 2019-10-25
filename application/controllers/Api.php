@@ -4953,7 +4953,7 @@ class Api extends CI_Controller {
         }
     }
 
-    public function telecom()
+    public function telecomtmpclose()
     {
         try{
             //判断用户接口权限
@@ -5203,6 +5203,142 @@ class Api extends CI_Controller {
                             $code = "100";
                             $orderno = $this->apiclass->createorderno();
                             $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"tanzhenunicom");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        else
+                        {
+                            $this->apiclass->response(500);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $this->apiclass->response($code);
+            }
+        }
+        catch (Exception $e)
+        {
+            log_message('error',$e->getMessage());
+            $this->apiclass->response(500);
+        }
+    }
+
+    public function telecom()
+    {
+        try{
+            //判断用户接口权限
+            $this->benchmark->mark('function_start');
+            $time1 = $this->benchmark->elapsed_time('total_execution_time_start', 'function_start');
+            log_message('info',$time1);
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
+            if($code == 1)
+            {
+                $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $data = json_decode($datajson,true);
+                $name = !empty($data["name"])?$data["name"]:null;
+                $idNo = !empty($data["idNo"])?$data["idNo"]:null;
+                $phone = !empty($data["phone"])?$data["phone"]:null;
+                //判断参数
+                if($name == null || $idNo == null || $phone == null)
+                {
+                    $code = 110;
+                    $this->apiclass->response($code);
+                }
+                else
+                {
+                    if (!$this->apiclass->isTelecom($phone)){
+                        $state = "1103";
+                        $result = array(
+                            "result"=>"参数错误",
+                            "state"=>$state
+                        );
+                        $ischarge = 0;
+                        $code = "100";
+                        $orderno = $this->apiclass->createorderno();
+                        $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"tanzhentelecommd5");
+                        $this->apiclass->response($code,$result,$orderno);
+                        return;
+                    }
+                    $this->benchmark->mark('curl_start');
+                    $time2 = $this->benchmark->elapsed_time('function_start', 'curl_start');
+                    log_message('info',$time2);
+                    $data = array(
+                        "id"=>md5($idNo),
+                        "name"=>$name,
+                        "mobile"=>md5($phone)
+                    );
+
+                    $this->load->library('tanzhen');
+                    $out = $this->tanzhen->getdata("threemd5",$data);
+
+                    $this->benchmark->mark('curl_end');
+                    $time3 = $this->benchmark->elapsed_time('curl_start', 'curl_end');
+                    log_message('info',$time3);
+                    //判断返回值
+                    if($out == "500")
+                    {
+                        $this->apiclass->response($out);
+                    }
+                    else
+                    {
+                        $arr = json_decode($out,true);
+                        $success = !empty($arr["success"])?$arr["success"]:null;
+
+                        //判断返回json
+                        if ($success == true)
+                        {
+                            $code = $arr["code"];
+                            switch ($code)
+                            {
+                                case 0:
+                                    $value= $arr["data"]["value"];
+                                    switch ($value)
+                                    {
+                                        case "0":
+                                            $state = "1100";
+                                            $result = array(
+                                                "result" => "一致",
+                                                "state"=>$state
+                                            );
+                                            $ischarge = 1;
+                                            break;
+                                        case "1":
+                                            $state = "1101";
+                                            $result = array(
+                                                "result" => "不一致",
+                                                "state"=>$state
+                                            );
+                                            $ischarge = 1;
+                                            break;
+                                        default:
+                                            $this->apiclass->response(500);
+                                            break;
+                                    }
+                                    break;
+                                case 3:
+                                    $state = "1102";
+                                    $result = array(
+                                        "result"=>"库中无此号",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case 4:
+                                    $code = 110;
+                                    $this->apiclass->response($code);
+                                    return;
+                                default:
+                                    $this->apiclass->response(500);
+                                    return;
+                            }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"tanzhentelecommd5");
                             $this->apiclass->response($code,$result,$orderno);
                         }
                         else
