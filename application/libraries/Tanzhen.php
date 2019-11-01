@@ -56,15 +56,6 @@ class Tanzhen {
         }
     }
 
-    function test(){
-        return $this->CI->cache->file->get("token");
-    }
-
-    function change(){
-        $this->CI->cache->file->save("token","change",1);
-        return $this->CI->cache->file->get("token");
-    }
-
 
     function getdata($api,$data,$time = 5){
         switch ($api) {
