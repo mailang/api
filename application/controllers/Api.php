@@ -4760,8 +4760,8 @@ class Api extends CI_Controller {
                                             $state = "1100";
                                             $result = array(
                                                 "result" => array(
-                                                    "max"=>"12",
-                                                    "min"=>"24"
+                                                    "max"=>"24",
+                                                    "min"=>"-1"
                                                 ),
                                                 "state"=>$state
                                             );
@@ -4771,8 +4771,8 @@ class Api extends CI_Controller {
                                             $state = "1100";
                                             $result = array(
                                                 "result" => array(
-                                                    "max"=>"12",
-                                                    "min"=>"24"
+                                                    "max"=>"24",
+                                                    "min"=>"-1"
                                                 ),
                                                 "state"=>$state
                                             );
