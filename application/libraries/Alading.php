@@ -18,7 +18,7 @@ class Alading {
         }
         $postdata = new postdata();
         $datastr = http_build_query($data);
-        $endatastr = base64_encode(openssl_encrypt($data, 'DES-CBC',$postdata->key,OPENSSL_RAW_DATA,$postdata->key));
+        $endatastr = base64_encode(openssl_encrypt($datastr, 'DES-CBC',$postdata->key,OPENSSL_RAW_DATA,$postdata->key));
 
         $alldata = array(
             "apiKey" => $apikey,
