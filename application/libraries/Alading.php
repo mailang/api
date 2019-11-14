@@ -17,7 +17,7 @@ class Alading {
                 return "500";
         }
         $postdata = new postdata();
-        $datastr = http_build_query($data);
+        $datastr = $this->http_build_query($data);
         $endatastr = base64_encode(openssl_encrypt($datastr, 'DES-CBC',$postdata->key,OPENSSL_RAW_DATA,$postdata->key));
         log_message('info',$datastr."  ".$endatastr);
         $alldata = array(
@@ -28,7 +28,7 @@ class Alading {
         );
 
 
-        $alldatastr = http_build_query($alldata);
+        $alldatastr = $this->http_build_query($alldata);
         log_message('info',$alldatastr);
         $ch = curl_init();
 
@@ -55,6 +55,16 @@ class Alading {
         $jsonout = json_decode($out,true);
 
         return $out;
+    }
+
+    function http_build_query($arr){
+        $paramsJoined  = array();
+        foreach ($arr as $param=>$value){
+            $paramsJoined[] = $param."=".$value;
+        }
+        $query = implode('&', $paramsJoined);
+        return $query;
+
     }
 }
 
