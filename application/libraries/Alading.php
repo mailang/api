@@ -19,7 +19,7 @@ class Alading {
         $postdata = new postdata();
         $datastr = http_build_query($data);
         $endatastr = base64_encode(openssl_encrypt($datastr, 'DES-CBC',$postdata->key,OPENSSL_RAW_DATA,$postdata->key));
-
+        log_message('info',$datastr."  ".$endatastr);
         $alldata = array(
             "apiKey" => $apikey,
             "username" => $postdata->account,
@@ -27,7 +27,9 @@ class Alading {
             "params" => $endatastr
         );
 
+
         $alldatastr = http_build_query($alldata);
+        log_message('info',$alldatastr);
         $ch = curl_init();
 
         curl_setopt($ch,CURLOPT_URL,$postdata->url);
