@@ -2192,7 +2192,7 @@ class Api extends CI_Controller {
                     );
 
                     $this->load->library('alading');
-                    $out = $this->jiaokenew->getdata("idcheck",$data);
+                    $out = $this->alading->getdata("idcheck",$data);
                     //判断返回值
                     if($out == "500")
                     {
