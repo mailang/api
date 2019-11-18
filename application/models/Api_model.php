@@ -21,11 +21,11 @@ class  Api_model extends CI_Model
         return $this->db->query($query, array($userid,"$appkey"))->row();
     }
 
-    public function insertorder($orderno,$userid,$proid,$detail,$ischarge,$state,$mark,$time)
+    public function insertorder($orderno,$userid,$proid,$detail,$ischarge,$state,$mark,$time,$updatedbtime)
     {
         //$time = date("Y-m-d H:i:s");
-        $query = "insert into api_order VALUE (0,?,?,?,?,?,?,?,?,?)";
-        return $this->db->query($query,array("$orderno","$userid","$proid","$detail","$ischarge","$state","$mark","$time","$time"));
+        $query = "insert into api_order VALUE (0,?,?,?,?,?,?,?,?,?,?)";
+        return $this->db->query($query,array("$orderno","$userid","$proid","$detail","$ischarge","$state","$mark","$updatedbtime","$time","$time"));
     }
 
     public function updateuserpro($userproid,$ischarge,$time)

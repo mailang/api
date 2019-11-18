@@ -93,9 +93,13 @@ class Apiclass {
 
     public function updatedb($userproid,$userid,$proid,$detail,$state,$ischarge,$orderno,$apistatis)
     {
+        $BM =& load_class('Benchmark', 'core');
+        $BM->mark('updatedb');
+        $updatedbtime = $BM->elapsed_time('total_execution_time_start', 'updatedb');
+
         $time = date("Y-m-d H:i:s");
         //$orderno = $this->createorderno();
-        $this->CI->api_model->insertorder($orderno,$userid,$proid,$detail,$ischarge,$state,$apistatis,$time);
+        $this->CI->api_model->insertorder($orderno,$userid,$proid,$detail,$ischarge,$state,$apistatis,$time,$updatedbtime);
         $this->CI->api_model->updateuserpro($userproid,$ischarge,$time);
         $this->CI->api_model->updatestatis($apistatis,$time);
     }
