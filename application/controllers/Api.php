@@ -2401,6 +2401,178 @@ class Api extends CI_Controller {
                 {
                     $data = array(
                         "name"=>$name,
+                        "identityCard"=>$idNo,
+                        "imgstr"=>$photo
+                    );
+
+                    $this->load->library('alading');
+                    $out = $this->alading->getdata("idphoto",$data,20);
+                    //判断返回值
+                    if($out == "500")
+                    {
+                        $this->apiclass->response($out);
+                    }
+                    else
+                    {
+                        $arr = json_decode($out,true);
+                        $code = !empty($arr["code"])?$arr["code"]:null;
+                        //var_dump($arr);
+                        //判断返回json
+                        if ($code == 0)
+                        {
+                            $data = $arr["data"];
+
+                            $result = "";
+                            //$state = $result["state"];
+                            //var_dump($result);
+                            $ischarge = 0;
+                            switch ($data["result"])
+                            {
+                                case  "1":
+                                case  "2":
+                                case  "3":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>"对比成功",
+                                        "state"=>$state,
+                                        "grade"=>number_format($data["verificationScore"],2)
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case "4":
+                                    $state = "1101";
+                                    $result = array(
+                                        "result"=>"姓名和身份证号不一致",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case "5":
+                                    $state = "1102";
+                                    $result = array(
+                                        "result"=>"姓名和身份证号匹配,库无照片",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case "6":
+                                    $state = "1103";
+                                    $result = array(
+                                        "result"=>"照片base64编码异常",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case "7":
+                                    $state = "1104";
+                                    $result = array(
+                                        "result"=>"特征提取失败",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case "8":
+                                    $state = "1105";
+                                    $result = array(
+                                        "result"=>"检测到多于一张人脸",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case "9":
+                                    $state = "1106";
+                                    $result = array(
+                                        "result"=>"库中无此号，请到户籍所在地进行核实",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case "10":
+                                    $state = "1107";
+                                    $result = array(
+                                        "result"=>"上传相片质量校验不合格，请重新拍摄上传",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case "11":
+                                    $state = "1108";
+                                    $result = array(
+                                        "result"=>"图片大小不合格，请重新上传",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case "12":
+                                    $state = "1109";
+                                    $result = array(
+                                        "result"=>"姓名格式不正确",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                case "13":
+                                    $state = "1110";
+                                    $result = array(
+                                        "result"=>"身份证格式不正确",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                default:
+                                    $this->apiclass->response(500);
+                                    return;
+                            }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"aladingidphoto");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        else
+                        {
+                            $this->apiclass->response(500);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $this->apiclass->response($code);
+            }
+        }
+        catch (Exception $e)
+        {
+            log_message('error',$e->getMessage());
+            $this->apiclass->response(500);
+        }
+    }
+
+    public function photoverificationbak()
+    {
+        try{
+            //判断用户接口权限
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
+            if($code == 1)
+            {
+                $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $data = json_decode($datajson,true);
+                $name = !empty($data["name"])?$data["name"]:null;
+                $idNo = !empty($data["idNo"])?$data["idNo"]:null;
+                $photo = !empty($data["photo"])?$data["photo"]:null;
+                //判断参数
+                if($name == null || $idNo == null || $photo == null)
+                {
+                    $code = 110;
+                    $this->apiclass->response($code);
+                }
+                else
+                {
+                    $data = array(
+                        "name"=>$name,
                         "id_number"=>$idNo,
                         "imgstr"=>$photo
                     );
