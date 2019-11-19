@@ -2402,7 +2402,7 @@ class Api extends CI_Controller {
                     $data = array(
                         "name"=>$name,
                         "identityCard"=>$idNo,
-                        "imgstr"=>$photo
+                        "photo"=>$photo
                     );
 
                     $this->load->library('alading');
