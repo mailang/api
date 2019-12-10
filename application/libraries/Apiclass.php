@@ -93,7 +93,8 @@ class Apiclass {
 
     public function updatedb($userproid,$userid,$proid,$detail,$state,$ischarge,$orderno,$apistatis)
     {
-        $ip = $_SERVER['REMOTE_ADDR'];
+        //$ip = $_SERVER['REMOTE_ADDR'];
+        $ip = $this->CI->input->ip_address();
         $BM =& load_class('Benchmark', 'core');
         $BM->mark('updatedb');
         $updatedbtime = $BM->elapsed_time('total_execution_time_start', 'updatedb');
