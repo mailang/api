@@ -2435,7 +2435,7 @@ class Api extends CI_Controller {
                                     $result = array(
                                         "result"=>"对比成功",
                                         "state"=>$state,
-                                        "grade"=>number_format($data["verificationScore"],2)
+                                        "grade"=>number_format($data["verificationScore"]/100,2)
                                     );
                                     $ischarge = 1;
                                     break;
