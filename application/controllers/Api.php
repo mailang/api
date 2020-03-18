@@ -1288,7 +1288,7 @@ class Api extends CI_Controller {
         }
     }
 
-    public function unicomonlinebak()
+    public function unicomonline()
     {
         try{
             //判断用户接口权限
@@ -1864,7 +1864,7 @@ class Api extends CI_Controller {
     }
 
 
-    public function telecomstatusbak()
+    public function telecomstatus()
     {
         try{
             //判断用户接口权限
@@ -3516,7 +3516,7 @@ class Api extends CI_Controller {
     }
 
 
-    public function telecombak()
+    public function telecom()
     {
         try{
             //判断用户接口权限
@@ -3664,7 +3664,7 @@ class Api extends CI_Controller {
         }
     }
 
-    public function unicombak()
+    public function unicom()
     {
         try{
             //判断用户接口权限
@@ -5234,7 +5234,7 @@ class Api extends CI_Controller {
         }
     }
 
-    public function unicomonline()
+    public function unicomonlinebak()
     {
         try{
             //判断用户接口权限
@@ -5408,7 +5408,7 @@ class Api extends CI_Controller {
         }
     }
 
-    public function telecomstatus()
+    public function telecomstatusbak()
     {
         try{
             //判断用户接口权限
@@ -5688,7 +5688,7 @@ class Api extends CI_Controller {
         }
     }
 
-    public function unicom()
+    public function unicombak()
     {
         try{
             //判断用户接口权限
@@ -5823,7 +5823,7 @@ class Api extends CI_Controller {
         }
     }
 
-    public function telecom()
+    public function telecombak()
     {
         try{
             //判断用户接口权限
