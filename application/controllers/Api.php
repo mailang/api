@@ -2796,7 +2796,7 @@ class Api extends CI_Controller {
         }
     }
 
-    public function banktwo(){
+    public function banktwoold(){
         try{
             //判断用户接口权限
             $validitycode = $this->apiclass->validate();
@@ -3140,7 +3140,7 @@ class Api extends CI_Controller {
         }
     }
 
-    public function bankthree(){
+    public function bankthreeold(){
         try{
             //判断用户接口权限
             $validitycode = $this->apiclass->validate();
@@ -3252,7 +3252,7 @@ class Api extends CI_Controller {
     }
 
 
-    public function bankfour(){
+    public function bankfourold(){
         try{
             //判断用户接口权限
             $validitycode = $this->apiclass->validate();
@@ -3364,6 +3364,235 @@ class Api extends CI_Controller {
         }
     }
 
+
+    public function bankthree()
+    {
+        try{
+            //判断用户接口权限
+            $this->benchmark->mark('function_start');
+            $time1 = $this->benchmark->elapsed_time('total_execution_time_start', 'function_start');
+            log_message('info',$time1);
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
+            if($code == 1)
+            {
+                $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $data = json_decode($datajson,true);
+                $name = !empty($data["name"])?$data["name"]:null;
+                $idNo = !empty($data["idNo"])?$data["idNo"]:null;
+                $bankcard = !empty($data["bankcard"])?$data["bankcard"]:null;
+                //判断参数
+                if($name == null || $idNo == null || $bankcard == null)
+                {
+                    $code = 110;
+                    $this->apiclass->response($code);
+                }
+                else
+                {
+                    $this->benchmark->mark('curl_start');
+                    $time2 = $this->benchmark->elapsed_time('function_start', 'curl_start');
+                    log_message('info',$time2);
+                    $this->load->library('zhongchengxin');
+                    $out = $this->zhongchengxin->bankthree($name,$idNo,$bankcard);
+                    $this->benchmark->mark('curl_end');
+                    $time3 = $this->benchmark->elapsed_time('curl_start', 'curl_end');
+                    log_message('info',$time3);
+                    //判断返回值
+                    if($out == "500")
+                    {
+                        $this->apiclass->response($out);
+                    }
+                    else
+                    {
+                        $arr = json_decode($out,true);
+                        $code = !empty($arr["status_code"])?$arr["status_code"]:null;
+                        //判断返回json
+                        if ($code == "200")
+                        {
+                            $result = $arr["data"];
+                            $state = $result["bank_card_verify_3d_result"];
+                            //var_dump($result);
+                            $ischarge = 0;
+                            switch ($state)
+                            {
+                                case  "1":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>"一致",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "2":
+                                    $state = "1101";
+                                    $result = array(
+                                        "result"=>"不一致",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "0":
+                                    $state = "1102";
+                                    $result = array(
+                                        "result"=>"库中无此号",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                default:
+                                    $this->apiclass->response(500);
+                                    return;
+                            }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"zhongchengxingbankthree");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        elseif ($code == "101" || $code == "101001" || $code == "101002" || $code == "101003" || $code == "101005"  || $code == "101006" || $code == "101007")
+                        {
+                            var_dump($code);
+                            $code = 110;
+                            $this->apiclass->response($code);
+                        }
+                        else
+                        {
+                            $this->apiclass->response(500);
+                        }
+                        $this->benchmark->mark('function_end');
+                        $time4 = $this->benchmark->elapsed_time('curl_end', 'function_end');
+                        log_message('info',$time4);
+                    }
+                }
+            }
+            else
+            {
+                $this->apiclass->response($code);
+            }
+        }
+        catch (Exception $e)
+        {
+            log_message('error',$e->getMessage());
+            $this->apiclass->response(500);
+        }
+    }
+
+    public function bankfour()
+    {
+        try{
+            //判断用户接口权限
+            $this->benchmark->mark('function_start');
+            $time1 = $this->benchmark->elapsed_time('total_execution_time_start', 'function_start');
+            log_message('info',$time1);
+            $validitycode = $this->apiclass->validate();
+            $code = is_numeric($validitycode)?$validitycode:1;
+            if($code == 1)
+            {
+                $datajson = file_get_contents('php://input');
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $datajson = $this->apiclass->decrypt($datajson);
+                log_message('info',$datajson."---time:".date("Y-m-d H:i:s"));
+                $data = json_decode($datajson,true);
+                $name = !empty($data["name"])?$data["name"]:null;
+                $idNo = !empty($data["idNo"])?$data["idNo"]:null;
+                $bankcard = !empty($data["bankcard"])?$data["bankcard"]:null;
+                $phone = !empty($data["phone"])?$data["phone"]:null;
+
+                //判断参数
+                if($name == null || $idNo == null || $bankcard == null|| $phone == null)
+                {
+                    $code = 110;
+                    $this->apiclass->response($code);
+                }
+                else
+                {
+                    $this->benchmark->mark('curl_start');
+                    $time2 = $this->benchmark->elapsed_time('function_start', 'curl_start');
+                    log_message('info',$time2);
+                    $this->load->library('zhongchengxin');
+                    $out = $this->zhongchengxin->bankfour($name,$idNo,$bankcard,$phone);
+                    $this->benchmark->mark('curl_end');
+                    $time3 = $this->benchmark->elapsed_time('curl_start', 'curl_end');
+                    log_message('info',$time3);
+                    //判断返回值
+                    if($out == "500")
+                    {
+                        $this->apiclass->response($out);
+                    }
+                    else
+                    {
+                        $arr = json_decode($out,true);
+                        $code = !empty($arr["status_code"])?$arr["status_code"]:null;
+                        //判断返回json
+                        if ($code == "200")
+                        {
+                            $result = $arr["data"];
+                            $state = $result["bank_card_verify_4d_result"];
+                            //var_dump($result);
+                            $ischarge = 0;
+                            switch ($state)
+                            {
+                                case  "1":
+                                    $state = "1100";
+                                    $result = array(
+                                        "result"=>"一致",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "2":
+                                    $state = "1101";
+                                    $result = array(
+                                        "result"=>"不一致",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 1;
+                                    break;
+                                case  "0":
+                                    $state = "1102";
+                                    $result = array(
+                                        "result"=>"库中无此号",
+                                        "state"=>$state
+                                    );
+                                    $ischarge = 0;
+                                    break;
+                                default:
+                                    $this->apiclass->response(500);
+                                    return;
+                            }
+                            $code = "100";
+                            $orderno = $this->apiclass->createorderno();
+                            $this->apiclass->updatedb($validitycode["userproid"],$validitycode["userid"],$validitycode["proid"],$datajson,$state,$ischarge,$orderno,"zhongchengxingbankfour");
+                            $this->apiclass->response($code,$result,$orderno);
+                        }
+                        elseif ($code == "101" || $code == "101001" || $code == "101002" || $code == "101003" || $code == "101005"  || $code == "101006" || $code == "101007")
+                        {
+                            $code = 110;
+                            $this->apiclass->response($code);
+                        }
+                        else
+                        {
+                            $this->apiclass->response(500);
+                        }
+                        $this->benchmark->mark('function_end');
+                        $time4 = $this->benchmark->elapsed_time('curl_end', 'function_end');
+                        log_message('info',$time4);
+                    }
+                }
+            }
+            else
+            {
+                $this->apiclass->response($code);
+            }
+        }
+        catch (Exception $e)
+        {
+            log_message('error',$e->getMessage());
+            $this->apiclass->response(500);
+        }
+    }
 
 
     public function mobile()
