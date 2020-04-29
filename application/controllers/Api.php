@@ -741,7 +741,7 @@ class Api extends CI_Controller {
                                     $ischarge = 1;
                                     break;
                                 case  "B":
-                                    $state = "1100";
+                                    $state = "1101";
                                     $result = array(
                                         "result" => "停机",
                                         "state"=>$state
@@ -749,7 +749,7 @@ class Api extends CI_Controller {
                                     $ischarge = 1;
                                     break;
                                 case  "C":
-                                    $state = "1100";
+                                    $state = "1102";
                                     $result = array(
                                         "result" => "在网但不可用",
                                         "state"=>$state
@@ -757,7 +757,7 @@ class Api extends CI_Controller {
                                     $ischarge = 1;
                                     break;
                                 case  "D":
-                                    $state = "1100";
+                                    $state = "1103";
                                     $result = array(
                                         "result" => "不在网",
                                         "state"=>$state
@@ -765,7 +765,7 @@ class Api extends CI_Controller {
                                     $ischarge = 1;
                                     break;
                                 case  "E":
-                                    $state = "1100";
+                                    $state = "1104";
                                     $result = array(
                                         "result" => "预销户或空号",
                                         "state"=>$state
@@ -773,7 +773,7 @@ class Api extends CI_Controller {
                                     $ischarge = 1;
                                     break;
                                 case  "X":
-                                    $state = "1101";
+                                    $state = "1105";
                                     $result = array(
                                         "result"=>"未查到",
                                         "state"=>$state
