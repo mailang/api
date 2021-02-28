@@ -20,7 +20,7 @@ class Xiaoshi {
             "loginName" => $postdata->account,
             "pwd" => $postdata->key,
             "serviceName" => $postdata->servicename,
-            "params" => $arr
+            "param" => $arr
         );
 
         $randStr = str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890');
