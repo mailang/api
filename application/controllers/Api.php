@@ -3395,8 +3395,8 @@ class Api extends CI_Controller {
                     $this->benchmark->mark('curl_start');
                     $time2 = $this->benchmark->elapsed_time('function_start', 'curl_start');
                     log_message('info',$time2);
-                    $this->load->library('zhongchengxin');
-                    $out = $this->zhongchengxin->bankthree($name,$idNo,$bankcard);
+                    $this->load->library('xiaoshi');
+                    $out = $this->xiaoshi->bankthree($name,$idNo,$bankcard);
                     $this->benchmark->mark('curl_end');
                     $time3 = $this->benchmark->elapsed_time('curl_start', 'curl_end');
                     log_message('info',$time3);
