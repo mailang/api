@@ -3365,7 +3365,7 @@ class Api extends CI_Controller {
     }
 
 
-    public function bankthreetest()
+    public function bankthree()
     {
         try{
             //判断用户接口权限
@@ -3466,7 +3466,7 @@ class Api extends CI_Controller {
     }
 
 
-    public function bankthree()
+    public function bankthreeoldzxt()
     {
         try{
             //判断用户接口权限
