@@ -131,5 +131,5 @@ class postdata{
     public $key = "huasheng0225";//密码
     public $servicename = "NameIDCardAccountVerify";
     public $url3 = "https://www.miniscores.cn:8313/CreditFunc/v2.1/NameIDCardAccountVerify";// 测试地址
-    public $url4 = "https://www.miniscores.cn:8313/CreditFunc/v2.1/NameIDCardAccountVerify";// 测试地址
+    public $url4 = "https://www.miniscores.cn:8313/CreditFunc/v2.1/NameIDCardPhoneAccountVerify";// 测试地址
 }
