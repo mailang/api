@@ -19,14 +19,14 @@ class Xiaoshi {
         $alldata = array(
             "loginName" => $postdata->account,
             "pwd" => $postdata->key,
-            "serviceName" => $postdata->servicename,
+            "serviceName" => $postdata->servicename3,
             "param" => $arr
         );
 
         $randStr = str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890');
         $rand = substr($randStr,0,6);
 
-        $mvTrackId = date("YmdHis")."_".$postdata->servicename."_".$postdata->account.$rand;
+        $mvTrackId = date("YmdHis")."_".$postdata->servicename3."_".$postdata->account.$rand;
 
 
         $alldatastr = json_encode($alldata, JSON_UNESCAPED_UNICODE);
@@ -75,14 +75,14 @@ class Xiaoshi {
         $alldata = array(
             "loginName" => $postdata->account,
             "pwd" => $postdata->key,
-            "serviceName" => $postdata->servicename,
+            "serviceName" => $postdata->servicename4,
             "param" => $arr
         );
 
         $randStr = str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890');
         $rand = substr($randStr,0,6);
 
-        $mvTrackId = date("YmdHis")."_".$postdata->servicename."_".$postdata->account.$rand;
+        $mvTrackId = date("YmdHis")."_".$postdata->servicename4."_".$postdata->account.$rand;
 
 
         $alldatastr = json_encode($alldata, JSON_UNESCAPED_UNICODE);
@@ -129,7 +129,8 @@ class Xiaoshi {
 class postdata{
     public $account = "huasheng"; //账号
     public $key = "huasheng0225";//密码
-    public $servicename = "NameIDCardAccountVerify";
+    public $servicename3 = "NameIDCardAccountVerify";
+    public $servicename4 = "NameIDCardPhoneAccountVerify";
     public $url3 = "https://www.miniscores.cn:8313/CreditFunc/v2.1/NameIDCardAccountVerify";// 测试地址
     public $url4 = "https://www.miniscores.cn:8313/CreditFunc/v2.1/NameIDCardPhoneAccountVerify";// 测试地址
 }
